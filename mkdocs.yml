@@ -1,0 +1,8 @@
+site_name: Made4Net Documentation
+site_url: https://sitename.example
+nav:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs
+  
+  
