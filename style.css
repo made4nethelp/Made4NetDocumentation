@@ -1,4 +1,153 @@
-.wy-side-nav-search 
-    {
-       background-color: #dc4f4f !important;
-    }
+/* =================================
+   BRAND VARIABLES
+================================= */
+:root {
+  --brand-red: #d82e20;
+  --sidebar-bg: #3c3e40;
+  --text-white: #ffffff;
+  --text-black: #000000;
+}
+
+/* =================================
+   LEFT SIDEBAR
+================================= */
+.wy-nav-side {
+  background-color: var(--sidebar-bg) !important;
+}
+
+/* =================================
+   SEARCH AREA (TOP LEFT)
+================================= */
+.wy-side-nav-search {
+  background-color: var(--brand-red) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.wy-side-nav-search input {
+  background-color: #ffffff !important;
+  color: var(--text-black) !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+/* Search icon */
+.wy-side-nav-search i {
+  color: var(--text-white) !important;
+}
+
+/* =================================
+   SIDEBAR MENU ITEMS
+================================= */
+.wy-menu-vertical a {
+  color: var(--text-white) !important;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover (non-active) */
+.wy-menu-vertical a:hover {
+  background-color: var(--brand-red) !important;
+  color: var(--text-white) !important;
+}
+
+/* =================================
+   ACTIVE (CURRENT) MENU ITEM
+================================= */
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.current > a:visited {
+  background-color: #ffffff !important;
+  color: var(--text-black) !important;
+  font-weight: 600;
+}
+
+/* Keep active item white on hover */
+.wy-menu-vertical li.current > a:hover {
+  background-color: #ffffff !important;
+  color: var(--text-black) !important;
+}
+
+/* Active item icons */
+.wy-menu-vertical li.current > a i {
+  color: var(--text-black) !important;
+}
+
+/* =================================
+   NESTED MENU ITEMS
+================================= */
+.wy-menu-vertical li ul li a {
+  padding-left: 32px;
+  font-size: 90%;
+}
+
+/* =================================
+   CONTENT AREA
+================================= */
+.wy-nav-content {
+  background-color: #ffffff;
+}
+
+/* Content links */
+.wy-nav-content a {
+  color: var(--brand-red);
+}
+
+.wy-nav-content a:hover {
+  text-decoration: underline;
+}
+
+/* =================================
+   FOOTER
+================================= */
+.rst-footer-buttons {
+  border-top: 1px solid #e0e0e0;
+}
+
+/* =================================
+   SCROLLBAR (SUBTLE)
+================================= */
+.wy-nav-side::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wy-nav-side::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.25);
+  border-radius: 3px;
+}
+
+/* =================================
+   DROPDOWN / EXPANDED MENU ITEMS
+================================= */
+
+/* Background for expanded section */
+.wy-menu-vertical li.toctree-l1.current > ul,
+.wy-menu-vertical li.toctree-l1 > ul {
+  background-color: #2f3133 !important; /* slightly lighter than sidebar */
+  margin: 4px 0;
+}
+
+/* Dropdown item links */
+.wy-menu-vertical li.toctree-l2 > a {
+  color: #ffffff !important;
+  padding: 8px 20px;
+  font-size: 90%;
+}
+
+/* Hover on dropdown items */
+.wy-menu-vertical li.toctree-l2 > a:hover {
+  background-color: var(--brand-red) !important;
+  color: #ffffff !important;
+}
+
+/* Active dropdown item */
+.wy-menu-vertical li.toctree-l2.current > a,
+.wy-menu-vertical li.toctree-l2.current > a:visited {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 600;
+}
+
+/* Keep active dropdown white on hover */
+.wy-menu-vertical li.toctree-l2.current > a:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
