@@ -3,6 +3,9 @@ site_url: https://sitename.example
 nav:
   - Home: index.md
   - About: about.md
-theme: readthedocs
+theme: 
+    name: readthedocs
+    primary : red
   
-  
+extra_css:
+  - style.css
