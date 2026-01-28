@@ -3,6 +3,7 @@ site_url: https://sitename.example
 nav:
   - Home: index.md
   - About: about.md
+  - Troubleshooting: Troubleshooting.md
 theme: 
     name: readthedocs
     primary : red
