@@ -50,6 +50,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#troubleshooting-steps">Troubleshooting steps</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#documents">Documents</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#viewtotable-scheduler">ViewToTable Scheduler</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -65,6 +69,11 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="FileImporter/">File Importer Troubleshoot</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -116,6 +125,15 @@ docs/
     index.md  # The documentation homepage.
     ...       # Other markdown pages, images and other files.
 </code></pre>
+<h3 id="viewtotable-scheduler">ViewToTable Scheduler</h3>
+<p>A new <strong>configuration-only scheduler</strong> has been added that allows inserting data from a SQL <strong>View</strong> into a SQL <strong>Table</strong> without writing any new scheduler code.</p>
+<p><strong>Key highlights:</strong>
+- Fully reusable scheduler implementation
+- View and table are configurable via scheduler arguments
+- Supports multiple use cases using the same scheduler
+- No code changes required for new implementations</p>
+<p>Refer to:
+- <strong>Schedulers → ViewToTable Scheduler</strong> for full setup and configuration details</p>
               
             </div>
           </div><footer>
@@ -164,5 +182,5 @@ docs/
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-01-29 15:17:07.903784+00:00
+Build Date UTC : 2026-02-03 22:49:12.413394+00:00
 -->
