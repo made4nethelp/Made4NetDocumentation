@@ -5,6 +5,8 @@ nav:
   - About: about.md
   - Troubleshooting: Troubleshooting.md
   - File Importer Troubleshoot: FileImporter.md
+  - Schedulers:
+      - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
 theme: 
     name: readthedocs
     primary : red
