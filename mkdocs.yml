@@ -4,6 +4,7 @@ nav:
   - Home: index.md
   - About: about.md
   - Troubleshooting: Troubleshooting.md
+  - File Importer Troubleshoot: FileImporter.md
 theme: 
     name: readthedocs
     primary : red

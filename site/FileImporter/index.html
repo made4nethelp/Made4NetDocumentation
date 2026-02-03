@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sitename.example/about/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sitename.example/FileImporter/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>About - Made4Net Documentation</title>
+    <title>File Importer Troubleshoot - Made4Net Documentation</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "About";
-        var mkdocs_page_input_path = "about.md";
-        var mkdocs_page_url = "/about/";
+        var mkdocs_page_name = "File Importer Troubleshoot";
+        var mkdocs_page_input_path = "FileImporter.md";
+        var mkdocs_page_url = "/FileImporter/";
       </script>
     
     <!--[if lt IE 9]>
@@ -44,30 +44,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">About</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#made4net">Made4Net</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#contact">Contact</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#address">Address</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documents">Documents</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting-steps">Troubleshooting steps</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#documents_1">Documents</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../Troubleshooting/">Troubleshooting</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../FileImporter/">File Importer Troubleshoot</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">File Importer Troubleshoot</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#inconsistent-file-movement-to-destination-folder">Inconsistent file movement to destination folder</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#import-deosnt-happen-when-a-file-is-dropped">Import Deosn't happen when a file is dropped</a>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -84,7 +76,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">About</li>
+      <li class="breadcrumb-item active">File Importer Troubleshoot</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -93,52 +85,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="about">About</h1>
-<h2 id="made4net">Made4Net</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="contact">Contact</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
-<h2 id="address">Address</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="documents">Documents</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
-<h2 id="troubleshooting-steps">Troubleshooting steps</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="documents_1">Documents</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+                <h1 id="troubleshooting-file-imports">Troubleshooting File Imports</h1>
+<h2 id="inconsistent-file-movement-to-destination-folder">Inconsistent file movement to destination folder</h2>
+<p>Things to check when an Error word keeps appending to the file instead of moving to either Success or Error folder</p>
+<p><img alt="testing" src="../img/FileImporterParamsCheck.png" /></p>
+<p>Check Plugin Params for Folder Directory
+make sure folder directory exists and ends with a back slash '\'</p>
+<h2 id="import-deosnt-happen-when-a-file-is-dropped">Import Deosn't happen when a file is dropped</h2>
+<p>Make sure the services are on</p>
+<p>Make sure you are dropping in the correct import Directory</p>
+<p>Make sure the file filter you are using is correct. It should match from the plugin params.</p>
+<p>If it doesn't get fixed after checking the above points, then check validations in code for the file exentions.</p>
+<p><strong>Ignore case for the file extention using either</strong></p>
+<p><strong>oInputFile.Extension.ToUpper() == ".JSON"</strong></p>
+<p>or</p>
+<p><strong>String.Equals(oInputFile.Extension, ".JSON", StringComparison.OrdinalIgnoreCase);</strong></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Troubleshooting/" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Troubleshooting/" class="btn btn-neutral float-left" title="Troubleshooting"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -161,10 +127,8 @@ docs/
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Troubleshooting/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../Troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
