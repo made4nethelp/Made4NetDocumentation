@@ -1,5 +1,5 @@
 site_name: Made4Net Documentation
-site_url: https://sitename.example
+site_url: https://made4nethelp.github.io/Made4NetDocumentation/
 nav:
   - Home: index.md
   - About: about.md
