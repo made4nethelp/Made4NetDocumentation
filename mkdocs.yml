@@ -1,10 +1,10 @@
 site_name: Made4Net Documentation
 site_url: https://made4nethelp.github.io/Made4NetDocumentation/
 nav:
-  - Home: index.md
-  - About: about.md
-  - Troubleshooting: Troubleshooting.md
-  - File Importer Troubleshoot: FileImporter.md
+  - SSL Certificate: 
+      - IIS HTTPS Configuration: sslcertificate/certificateInstallationSteps.md
+  - File Imports: 
+      - File Importer Troubleshoot: FileImporter.md
   - Schedulers:
       - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
 theme: 
