@@ -2,18 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/</loc>
-         <lastmod>2026-02-09</lastmod>
+         <lastmod>2026-02-11</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/FileImporter/</loc>
-         <lastmod>2026-02-09</lastmod>
+         <lastmod>2026-02-11</lastmod>
+    </url>
+    <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dt-use-dt-connection/</loc>
+         <lastmod>2026-02-11</lastmod>
+    </url>
+    <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dtExpressions/</loc>
+         <lastmod>2026-02-11</lastmod>
+    </url>
+    <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/sku_onpropertychange_po/</loc>
+         <lastmod>2026-02-11</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/schedulers/view-to-table-scheduler/</loc>
-         <lastmod>2026-02-09</lastmod>
+         <lastmod>2026-02-11</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/sslcertificate/certificateInstallationSteps/</loc>
-         <lastmod>2026-02-09</lastmod>
+         <lastmod>2026-02-11</lastmod>
     </url>
 </urlset>

@@ -7,6 +7,10 @@ nav:
       - File Importer Troubleshoot: FileImporter.md
   - Schedulers:
       - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
+  - Data Editors:
+      - Expressions using functions: DataTables/dtExpressions.md
+      - Expressions using Views : DataTables/sku_onpropertychange_po.md
+      - DT Property on multiple warehouses : DataTables/dt-use-dt-connection.md  
 theme: 
     name: readthedocs
     primary : red

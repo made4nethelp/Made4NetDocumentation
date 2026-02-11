@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dtExpressions/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Expressions using functions - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Expressions using functions";
+        var mkdocs_page_input_path = "DataTables\\dtExpressions.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/DataTables/dtExpressions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">SSL Certificate</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../sslcertificate/certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Expressions using functions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#dynamic-field-visibility-using-dt-expressions">Dynamic Field Visibility Using DT Expressions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scope">Scope</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-table-information">Data Table Information</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tagid">TAGID</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dt-expression-configuration">DT Expression Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#field-tagid">Field: TAGID</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sql-function-fn_isbatchrequired">SQL Function: fn_IsBatchRequired</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#purpose">Purpose</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-signature">Function Signature</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logic-summary">Logic Summary</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#event-lifecycle">Event Lifecycle</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#skuonchange">SKU:onchange</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app-logic-function-getskuordersum">App Logic Function: GetSKUOrderSum</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#purpose_1">Purpose</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-source">Data Source</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#possible-returned-values">Possible returned values</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parameter-handling-in-getskuordersum">Parameter Handling in GetSKUOrderSum</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#consignee-is-passed-as-string-literal">CONSIGNEE is passed as string literal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-call">Function Call</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#end-to-end-execution-flow">End-to-End Execution Flow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ui-behavior">UI Behavior</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-tagid-disappears-on-sku-change">Why TAGID Disappears on SKU Change</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Editors</li>
+      <li class="breadcrumb-item active">Expressions using functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="field-expressions">Field Expressions</h1>
+<h2 id="dynamic-field-visibility-using-dt-expressions">Dynamic Field Visibility Using DT Expressions</h2>
+<h2 id="overview">Overview</h2>
+<p>This document explains <strong>end-to-end how a field visibility is controlled dynamically</strong> using an example from MT client <strong>Pack Order</strong> screen using:</p>
+<ul>
+<li>DT field expressions</li>
+<li>onchange Event</li>
+<li>Framework-level functions</li>
+<li>Database-level functions</li>
+</ul>
+<p>The goal is to clearly document <strong>why TAGID appears or disappears when SKU changes</strong>, and how the full execution flow works.</p>
+<hr />
+<h2 id="scope">Scope</h2>
+<p>This document covers:</p>
+<ul>
+<li>DT configuration and expressions</li>
+<li>Event triggering (<code>SKU:onchange</code>)</li>
+<li>Framework function execution</li>
+<li>SQL function execution</li>
+<li>UI behavior and outcomes</li>
+</ul>
+<hr />
+<h2 id="data-table-information">Data Table Information</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DT ID</td>
+<td>557335</td>
+</tr>
+<tr>
+<td>DT Name</td>
+<td>DTPackSKUOrderSumPackEdit_pkg</td>
+</tr>
+<tr>
+<td>Screen</td>
+<td>Pack Order → Build Packages</td>
+</tr>
+<tr>
+<td>Panel</td>
+<td>Right-side Pack Edit</td>
+</tr>
+<tr>
+<td>Primary Trigger</td>
+<td>SKU change</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pack Order Screen</strong><br />
+<img alt="DT Definition" src="../img/packorderscreen.png" /></p>
+<hr />
+<h3 id="tagid">TAGID</h3>
+<p>Field expression is given to Tag id under expressions tab and it is binded to onchange event of sku.
+So what ever function we give in this expressions gets executed when sku is changed 
+Onchange event includes changing sku value, shifting keyboard control from sku field to anyother field.</p>
+<ul>
+<li>Display Type: Info</li>
+<li>Data Type: String</li>
+<li>Shown or hidden dynamically</li>
+<li>Visibility controlled entirely by DT expression</li>
+</ul>
+<p><strong>TAGID Field</strong><br />
+<img alt="TAGID Field" src="../img/dt-sku-onchange.png" /></p>
+<hr />
+<h2 id="dt-expression-configuration">DT Expression Configuration</h2>
+<h3 id="field-tagid">Field: TAGID</h3>
+<p><strong>Property Controlled</strong></p>
+<pre><code>Visible
+</code></pre>
+<p><strong>Expression</strong></p>
+<pre><code>'0';func:fn_IsBatchRequired(field:CONSIGNEE,field:SKU)
+</code></pre>
+<p><strong>Event</strong></p>
+<pre><code>SKU:onchange
+</code></pre>
+<p>This configuration means <strong>every time SKU changes</strong>, the visibility of TAGID is recalculated.
+On sku Change a sql function fn_IsBatchRequired gets called</p>
+<p><strong>TAGID Expression Configuration</strong><br />
+<img alt="TAGID Expression" src="../img/dt_field_expression.png" /></p>
+<h2 id="sql-function-fn_isbatchrequired">SQL Function: fn_IsBatchRequired</h2>
+<h3 id="purpose">Purpose</h3>
+<p>Determines whether ** tag id** should be visible or not.</p>
+<h3 id="function-signature">Function Signature</h3>
+<pre><code class="language-sql">fn_IsBatchRequired (
+    @Consignee VARCHAR(100),
+    @Sku VARCHAR(100)
+) RETURNS BIT
+</code></pre>
+<h3 id="logic-summary">Logic Summary</h3>
+<ul>
+<li>Default result = <code>0</code> </li>
+<li>Checks SKU class attributes</li>
+<li>If <code>BATCH</code> attribute exists with <code>VERIFICATIONCAPTURE = 'REQUIRED'</code></li>
+<li>Returns <code>1</code></li>
+<li>Otherwise</li>
+<li>Returns <code>0</code></li>
+</ul>
+<p>function returning 0 means, TagId visibility = false ( TagID not visible)
+function returning 1 means, TagId visibility = True ( TagID visible)</p>
+<p><strong>fn_IsBatchRequired Function</strong><br />
+<img alt="fn_IsBatchRequired" src="../img/sql-fn-isbatchrequired.png" /></p>
+<hr />
+<h2 id="event-lifecycle">Event Lifecycle</h2>
+<h3 id="skuonchange">SKU:onchange</h3>
+<p>The <code>SKU:onchange</code> event is fired when:</p>
+<ul>
+<li>A SKU is selected</li>
+<li>A SKU value is typed</li>
+<li>A SKU value is replaced</li>
+</ul>
+<p>This event triggers <strong>immediate re-evaluation</strong> of all DT expressions bound to it.</p>
+<p>** Event Configuration**<br />
+<img alt="SKU OnChange Event" src="../img/dt-sku-onchange.png" /></p>
+<hr />
+<h2 id="app-logic-function-getskuordersum">App Logic Function: GetSKUOrderSum</h2>
+<h3 id="purpose_1">Purpose</h3>
+<p><code>GetSKUOrderSum</code> retrieves summary data for a given <strong>MASTERORDER + SKU</strong> combination.</p>
+<ul>
+<li>Written in App.Logic</li>
+<li>Executed when sku onchange happens.</li>
+</ul>
+<h3 id="data-source">Data Source</h3>
+<pre><code class="language-sql">vPackSKUOrderSumNH
+</code></pre>
+<h3 id="possible-returned-values">Possible returned values</h3>
+<table>
+<thead>
+<tr>
+<th>Field Parameter</th>
+<th>Returned Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>units</td>
+<td>UNITS</td>
+</tr>
+<tr>
+<td>packunits</td>
+<td>PACKUNITS</td>
+</tr>
+<tr>
+<td>remainder</td>
+<td>REMAINDER</td>
+</tr>
+<tr>
+<td>serialize</td>
+<td>SERIALIZE</td>
+</tr>
+<tr>
+<td>consignee</td>
+<td>CONSIGNEE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GetSKUOrderSum Code</strong><br />
+<img alt="GetSKUOrderSum" src="../img/code-getskuordersum.png" /></p>
+<h2 id="parameter-handling-in-getskuordersum">Parameter Handling in GetSKUOrderSum</h2>
+<p>In the DT expression configuration, the function is called like this:</p>
+<pre><code>func:GetSKUOrderSum(field:MASTERORDER,field:SKU,CONSIGNEE)
+</code></pre>
+<p>In DT expressions:</p>
+<pre><code>field:FIELDNAME
+</code></pre>
+<p>means:</p>
+<blockquote>
+<p>Pass the current value of this UI field to the function.</p>
+</blockquote>
+<p>So in this case:</p>
+<ul>
+<li><code>field:MASTERORDER</code> → passes the current MASTERORDER value from the UI row  </li>
+<li><code>field:SKU</code> → passes the current SKU value from the UI row  </li>
+</ul>
+<p>These values are dynamic and come from the Data Table.</p>
+<hr />
+<h3 id="consignee-is-passed-as-string-literal"><code>CONSIGNEE</code> is passed as string literal</h3>
+<p>The third parameter:</p>
+<pre><code>CONSIGNEE
+</code></pre>
+<p>is <strong>not a UI field reference</strong>.</p>
+<p>It is a literal string value passed to the function.</p>
+<p>Inside the function in App Logic:</p>
+<pre><code class="language-csharp">public static string GetSKUOrderSum(string smOrder, string sSKU, string sField)
+</code></pre>
+<p>The third parameter (<code>sField</code>) tells the function <strong>which column to return</strong> from the query result.</p>
+<p>Inside the switch statement:</p>
+<pre><code class="language-csharp">case &quot;consignee&quot;:
+    return dr[&quot;CONSIGNEE&quot;].ToString();
+</code></pre>
+<p>So:</p>
+<ul>
+<li><code>CONSIGNEE</code> is acting as a selector  </li>
+<li>It tells the function which column to extract from <code>vPackSKUOrderSumNH</code>  </li>
+<li>It is not reading the UI field value  </li>
+</ul>
+<hr />
+<h3 id="function-call">Function Call</h3>
+<pre><code>GetSKUOrderSum(
+    field:MASTERORDER,   ← value from UI
+    field:SKU,           ← value from UI
+    CONSIGNEE            ← literal string telling function which DB column to return
+)
+</code></pre>
+<p>The third parameter dynamically decides which column is returned.</p>
+<hr />
+<h2 id="end-to-end-execution-flow">End-to-End Execution Flow</h2>
+<pre><code>User changes SKU
+      ↓
+SKU:onchange event fired
+      ↓
+GetSKUOrderSum called (App.Logic)
+      ↓
+CONSIGNEE resolved
+      ↓
+fn_IsBatchRequired called (SQL function)
+      ↓
+Function returns 1 or 0
+      ↓
+TAGID Visible or Hidden
+</code></pre>
+<hr />
+<h2 id="ui-behavior">UI Behavior</h2>
+<h3 id="why-tagid-disappears-on-sku-change">Why TAGID Disappears on SKU Change</h3>
+<ul>
+<li>TAGID visibility is bound to <code>SKU:onchange</code></li>
+<li>When SKU is edited or partially entered:</li>
+<li>SKU may be temporarily invalid</li>
+<li>No matching SKU data found</li>
+<li><code>fn_IsBatchRequired</code> returns <code>0</code></li>
+<li>TAGID is hidden immediately</li>
+</ul>
+<p>** TAGID Hidden After SKU Change**<br />
+<img alt="TAGID Hidden" src="../img/ui-tagid-hidden.png" /></p>
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../schedulers/view-to-table-scheduler/" class="btn btn-neutral float-left" title="ViewToTable Scheduler"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../sku_onpropertychange_po/" class="btn btn-neutral float-right" title="Expressions using Views">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../schedulers/view-to-table-scheduler/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../sku_onpropertychange_po/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -151,3 +151,12 @@
   background-color: #ffffff !important;
   color: #000000 !important;
 }
+
+/* Hide MkDocs / ReadTheDocs footer */
+.rst-footer-buttons,
+footer,
+footer .rst-footer-buttons,
+footer .footer,
+footer p {
+  display: none !important;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/DataTables/sku_onpropertychange_po/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Expressions using Views - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Expressions using Views";
+        var mkdocs_page_input_path = "DataTables\\sku_onpropertychange_po.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/DataTables/sku_onpropertychange_po/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">SSL Certificate</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../sslcertificate/certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Expressions using Views</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Data Editors</li>
+      <li class="breadcrumb-item active">Expressions using Views</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="onpropertychange-event">onpropertychange Event</h1>
+<h2 id="overview">Overview</h2>
+<p>To go through onpropertychange take an example of purchase order screen from BE client and see how the <strong>PACK</strong> and <strong>PO Current Cost
+(UNITCOST)</strong> fields are automatically calculated when the <strong>SKU</strong> field
+changes in the Purchase Order Details screen.</p>
+<p>DT Used: <code>DT_PODETAIL_Insert</code>\
+Table Used: <code>vBE_POSKUPACK</code></p>
+<p>Event Trigger:</p>
+<pre><code>SKU:onpropertychange
+</code></pre>
+<hr />
+<h1 id="1-pack-field-expression">1. PACK Field Expression</h1>
+<h2 id="expression-dt-editor">Expression (DT Editor)</h2>
+<pre><code>[0];DBFIELD;[1];DBFIELD;[2];
+DBFIELD:(CASE_PACK,vBE_POSKUPACK,
+SKU = '{0}' AND POID = '{1}' AND CONSIGNEE = '{2}'
+~FIELD:SKU~FIELD:POID~FIELD:CONSIGNEE,)
+</code></pre>
+<h2 id="meaning">Meaning</h2>
+<p>When SKU changes:</p>
+<ol>
+<li>System reads:<ul>
+<li>SKU (FIELD:SKU)</li>
+<li>POID (FIELD:POID)</li>
+<li>CONSIGNEE (FIELD:CONSIGNEE)</li>
+</ul>
+</li>
+<li>It replaces placeholders:<ul>
+<li><code>{0}</code> → SKU</li>
+<li><code>{1}</code> → POID</li>
+<li><code>{2}</code> → CONSIGNEE</li>
+</ul>
+</li>
+<li>Executes equivalent query:</li>
+</ol>
+<pre><code class="language-sql">SELECT CASE_PACK
+FROM vBE_POSKUPACK
+WHERE SKU = '&lt;SKU&gt;'
+  AND POID = '&lt;POID&gt;'
+  AND CONSIGNEE = '&lt;CONSIGNEE&gt;';
+</code></pre>
+<ol>
+<li>Returned value populates <strong>PACK</strong> field.</li>
+</ol>
+<hr />
+<h1 id="2-po-current-cost-unitcost-expression">2. PO Current Cost (UNITCOST) Expression</h1>
+<h2 id="expression">Expression</h2>
+<pre><code>[0];DBFIELD;[1];DBFIELD;[2];
+DBFIELD:(TOTCOST,vBE_POSKUDEFAULTCOST,
+SKU = '{0}' AND POID = '{1}' AND CONSIGNEE = '{2}'
+~FIELD:SKU~FIELD:POID~FIELD:CONSIGNEE,)
+</code></pre>
+<h2 id="meaning_1">Meaning</h2>
+<p>When SKU changes:</p>
+<ol>
+<li>System reads SKU, POID, CONSIGNEE.</li>
+<li>Replaces placeholders.</li>
+<li>Executes equivalent query:</li>
+</ol>
+<pre><code class="language-sql">SELECT TOTCOST
+FROM vBE_POSKUDEFAULTCOST
+WHERE SKU = '&lt;SKU&gt;'
+  AND POID = '&lt;POID&gt;'
+  AND CONSIGNEE = '&lt;CONSIGNEE&gt;';
+</code></pre>
+<ol>
+<li>Returned value populates <strong>PO Current Cost (UNITCOST)</strong>.</li>
+</ol>
+<hr />
+<h1 id="3-execution-flow">3. Execution Flow</h1>
+<pre><code>User changes SKU
+        ↓
+SKU:onpropertychange event fires
+        ↓
+PACK expression executes (DBFIELD)
+        ↓
+UNITCOST expression executes (DBFIELD)
+        ↓
+Values auto-populated in UI
+</code></pre>
+<hr />
+<h2 id="4-tabular-form-of-fields-returned-from-views">4. Tabular form of Fields returned from Views</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Source View</th>
+<th>Column Returned</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PACK</td>
+<td>vBE_POSKUPACK</td>
+<td>CASE_PACK</td>
+<td>SKU:onpropertychange</td>
+</tr>
+<tr>
+<td>UNITCOST</td>
+<td>vBE_POSKUDEFAULTCOST</td>
+<td>TOTCOST</td>
+<td>SKU:onpropertychange</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>In this way we can populate fields automatically through field expression.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../dtExpressions/" class="btn btn-neutral float-left" title="Expressions using functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../dt-use-dt-connection/" class="btn btn-neutral float-right" title="DT Property on multiple warehouses">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../dtExpressions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../dt-use-dt-connection/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
