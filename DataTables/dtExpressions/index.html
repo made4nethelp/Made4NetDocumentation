@@ -232,8 +232,8 @@ Onchange event includes changing sku value, shifting keyboard control from sku f
 </code></pre>
 <p>This configuration means <strong>every time SKU changes</strong>, the visibility of TAGID is recalculated.
 On sku Change a sql function fn_IsBatchRequired gets called</p>
-<p>** TAGID Expression Configuration**<br />
-<img alt="TAGID Expression" src="./img/dt-field-expression.png" /></p>
+<p><strong>TAGID Expression Configuration</strong><br />
+<img alt="TAGID Expression" src="../img/dt_field_expression.png" /></p>
 <h2 id="sql-function-fn_isbatchrequired">SQL Function: fn_IsBatchRequired</h2>
 <h3 id="purpose">Purpose</h3>
 <p>Determines whether ** tag id** should be visible or not.</p>
@@ -266,7 +266,7 @@ function returning 1 means, TagId visibility = True ( TagID visible)</p>
 <li>A SKU value is replaced</li>
 </ul>
 <p>This event triggers <strong>immediate re-evaluation</strong> of all DT expressions bound to it.</p>
-<p>📸 <strong>Screenshot – Event Configuration</strong><br />
+<p>** Event Configuration**<br />
 <img alt="SKU OnChange Event" src="../img/dt-sku-onchange.png" /></p>
 <hr />
 <h2 id="app-logic-function-getskuordersum">App Logic Function: GetSKUOrderSum</h2>
@@ -310,7 +310,7 @@ function returning 1 means, TagId visibility = True ( TagID visible)</p>
 </tr>
 </tbody>
 </table>
-<p>📸 <strong>Screenshot – GetSKUOrderSum Code</strong><br />
+<p><strong>GetSKUOrderSum Code</strong><br />
 <img alt="GetSKUOrderSum" src="../img/code-getskuordersum.png" /></p>
 <h2 id="parameter-handling-in-getskuordersum">Parameter Handling in GetSKUOrderSum</h2>
 <p>In the DT expression configuration, the function is called like this:</p>
