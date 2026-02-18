@@ -73,6 +73,72 @@
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">4.12.1.x</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#release-notes-412128">Release Notes 4.12.1.28</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix">Appendix</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412127">Release Notes 4.12.1.27</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description_1">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix_1">Appendix</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412126">Release Notes 4.12.1.26</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description_2">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix_2">Appendix</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412125">Release Notes 4.12.1.25</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412124">Release Notes 4.12.1.24</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412124_1">Release Notes 4.12.1.24</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412123">Release Notes 4.12.1.23</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-41213">Release Notes 4.12.1.3</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description_3">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix_3">Appendix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dts">DTs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#database-changes">Database changes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#events">Events</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-41212">Release Notes 4.12.1.2</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description_4">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix_4">Appendix</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-41211">Release Notes 4.12.1.1</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#description_5">Description</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#appendix_5">Appendix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#database-changes_1">Database changes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dts_1">DTs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#xml-based-screen-changes">XML Based Screen Changes</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -112,7 +178,363 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="4121x-release-notes-hotfixes">4.12.1.x Release Notes &amp; Hotfixes</h1>
+<hr />
 <h2 id="release-notes-412128">Release Notes 4.12.1.28</h2>
+<h3 id="description">Description</h3>
+<ol>
+<li>In some cases, when using the Create &amp; Pickup option in the Create Load
+flow, the system did not navigate the user to the Putaway or Replenishment
+task.</li>
+<li>Now, when using the Create &amp; Pickup option, the system correctly directs
+the user to either the Replenishment or Putaway task, as applicable</li>
+</ol>
+<h3 id="appendix">Appendix</h3>
+<p>Replace the following files in the RDT/bin folder
+WMS.MobileWebApp.dll
+WMS.WebCtrls.dll
+Made4Net.Mobile.dll
+Made4Net.WebControls.dll</p>
+<hr />
+<h2 id="release-notes-412127">Release Notes 4.12.1.27</h2>
+<h3 id="description_1">Description</h3>
+<ol>
+<li>The SCExpert Connect Shopify plugin has been updated to support the
+latest Shopify API version 2026-01.</li>
+</ol>
+<h3 id="appendix_1">Appendix</h3>
+<p>Replace SCExpertConnectShopifyPlugin.dll in the Services folder</p>
+<hr />
+<h2 id="release-notes-412126">Release Notes 4.12.1.26</h2>
+<h3 id="description_2">Description</h3>
+<ol>
+<li>Previously, when a user without an assigned default Warehouse Printer
+attempted to print a Label, the system routed the print job to the default SKU
+Label printer.
+Now, when printing Labels from the Workstation screens and no user default
+Warehouse Printer is assigned, the system correctly selects the default
+printer based on the specific Label type</li>
+</ol>
+<h3 id="appendix_2">Appendix</h3>
+<p>Replace WMS.Logic.dll in the Workstation\bin folder
+Replace WMS.Logic.dll in the Services folder</p>
+<hr />
+<h2 id="release-notes-412125">Release Notes 4.12.1.25</h2>
+<p>Description
+1. Images added during the Proof of Delivery step were not always uploaded
+successfully.
+The image upload mechanism has now been improved to better handle
+unstable or slow internet connections, ensuring more reliable uploads.
+2. The POD application previously did not fully support routes without packages
+when the Task Confirmation Level was set to Document.
+This use case is now fully supported.</p>
+<p>Appendix
+1. Replace the entire Delivery folder
+2. Replace the entire Delivery folder</p>
+<hr />
+<h2 id="release-notes-412124">Release Notes 4.12.1.24</h2>
+<p>Description
+1. Receipt line details could be edited, even though the Receipt was in status
+Cancelled or Closed.
+Now, receipt lines of Receipts in status Cancelled or Closed cannot be
+edited.
+Workstation → Warehouse → Inbound Process → Receipts (RE)
+2. Notes were not saved in Limbo Adjustment.
+Now, notes are saved.
+Workstation → Warehouse → Inventory Control → Limbo Adjustments (LJ)
+3. There was an issue where the allocation quantity was incorrect during hot
+replenishment when the location was overridden to an alternative picking
+location.
+Now the quantities are allocated correctly during hot replenishment, and an
+additional task is created to move the load from the override location back to
+the original destination picking location.
+4. The Inbound Order Status field did not show the translated phrase in the grid
+view.
+Now, the Inbound Order Status shows the translated phrase in the grid.
+Workstation → Warehouse → Inbound Process → Inbound Order (IO)</p>
+<p>Appendix
+1. Replace WMS.Logic.dll in the Workstation\bin folder
+2. Replace WMS.WebApp.dll in the Workstation\bin folder
+Replace WMS.WebCtrls.dll in the Workstation\bin folder
+3. Replace WMS.Logic.dll in the RDT\bin folder
+4. Replace InboundOrder.aspx in Workstation\Screens</p>
+<hr />
+<h2 id="release-notes-412124_1">Release Notes 4.12.1.24</h2>
+<p>Description
+1. Receipt line details could be edited, even though the Receipt was in status
+Cancelled or Closed.
+Now, receipt lines of Receipts in status Cancelled or Closed cannot be
+edited.
+Workstation → Warehouse → Inbound Process → Receipts (RE)
+2. Notes were not saved in Limbo Adjustment.
+Now, notes are saved.
+Workstation → Warehouse → Inventory Control → Limbo Adjustments (LJ)
+3. There was an issue where the allocation quantity was incorrect during hot
+replenishment when the location was overridden to an alternative picking
+location.
+Now the quantities are allocated correctly during hot replenishment, and an
+additional task is created to move the load from the override location back to
+the original destination picking location.
+4. The Inbound Order Status field did not show the translated phrase in the grid
+view.
+Now, the Inbound Order Status shows the translated phrase in the grid.
+Workstation → Warehouse → Inbound Process → Inbound Order (IO)</p>
+<p>Appendix
+1. Replace WMS.Logic.dll in the Workstation\bin folder
+2. Replace WMS.WebApp.dll in the Workstation\bin folder
+Replace WMS.WebCtrls.dll in the Workstation\bin folder
+3. Replace WMS.Logic.dll in the RDT\bin folder
+4. Replace InboundOrder.aspx in Workstation\Screens</p>
+<hr />
+<h2 id="release-notes-412123">Release Notes 4.12.1.23</h2>
+<p>Description
+1. Receipt line details could be edited, even though the Receipt was in status
+Cancelled or Closed.
+Now, receipt lines of Receipts in status Cancelled or Closed cannot be
+edited.
+Workstation → Warehouse → Inbound Process → Receipts (RE)
+2. Notes were not saved in Limbo Adjustment.
+Now, notes are saved.
+Workstation → Warehouse → Inventory Control → Limbo Adjustments (LJ)
+3. There was an issue where the allocation quantity was incorrect during hot
+replenishment when the location was overridden to an alternative picking
+location.
+Now the quantities are allocated correctly during hot replenishment, and an
+additional task is created to move the load from the override location back to
+the original destination picking location.
+4. The Inbound Order Status field did not show the translated phrase in the grid
+view.
+Now, the Inbound Order Status shows the translated phrase in the grid.
+Workstation → Warehouse → Inbound Process → Inbound Order (IO)</p>
+<p>Appendix
+1. Replace WMS.Logic.dll in the Workstation\bin folder
+2. Replace WMS.WebApp.dll in the Workstation\bin folder
+Replace WMS.WebCtrls.dll in the Workstation\bin folder
+3. Replace WMS.Logic.dll in the RDT\bin folder
+4. Replace InboundOrder.aspx in Workstation\Screens</p>
+<hr />
+<h2 id="release-notes-41213">Release Notes 4.12.1.3</h2>
+<h3 id="description_3">Description</h3>
+<ol>
+<li>
+<p>When a load was created with a UOM other than the lowest UOM, the system created the load with the wrong quantity.
+Now, the system creates loads with the correct quantity based on the SKU UOM.
+Workstation → Warehouse → Inbound Process → Create Loads (CA)
+RDT → Receiving → Create Load</p>
+</li>
+<li>
+<p>When the Allocate UOM Qty field was defined in the Picking Policy line, the system allocated inventory even though the UOM did not exist in the SKU.
+Now, the system will allocate inventory ONLY if the UOM defined in the Allocate UOM Qty field is also defined in the SKU.</p>
+</li>
+<li>
+<p>The TaskSubType dropdown field in Task Assignment Policy did not show values.
+Now, the TaskSubType dropdown field shows values according to the values set in the Code Table.
+Workstation → Setup → Policies Setup → Task Assignment Policies (TP)</p>
+</li>
+<li>
+<p>The TaskSubType dropdown field in Tasks did not show values.
+Now, the TaskSubType dropdown field shows values according to the values set in the Code Table.
+Workstation → Warehouse → Task Management → Tasks (TS)</p>
+</li>
+<li>
+<p>The TaskSubType dropdown field in the Picking Policy Release tab did not show values.
+Now, the TaskSubType dropdown field shows values according to the values set in the Code Table.
+Workstation → Setup → Policies Setup → Picking Policies (PS)</p>
+</li>
+<li>
+<p>The Default Receiving UOM dropdown field in SKU Inventory Edit mode did not show any values.
+Now, the Default Receiving UOM dropdown field shows values set in the SKU UOM tab.
+Workstation → Masterdata → SKUs (ST)</p>
+</li>
+<li>
+<p>It was not possible to edit the values in the Document Attachment Format dropdown field of the Attachment tabs.
+Now the values of the Document Attachment Format dropdown field can be edited via the Code Table.
+Workstation → Setup → Warehouse Administration → Code Table (CT)</p>
+</li>
+<li>
+<p>There were missing Events and Audit entries in the Warehouse Upgrade script.
+For the full list of Events refer to Table 1 below.</p>
+</li>
+<li>
+<p>There were missing English vocabulary entries in the SYS Upgrade script.</p>
+</li>
+</ol>
+<h3 id="appendix_3">Appendix</h3>
+<p><strong>1.</strong> Replace WMS.Logic.dll in the Workstation\bin folder.<br />
+Replace WMS.Logic.dll in the RDT\bin folder.  </p>
+<p><strong>2.</strong> Replace WMS.Logic.dll in the Services folder.  </p>
+<h3 id="dts">DTs</h3>
+<p><strong>3.</strong> Import the DT DTTAPolicyDetail.xml  </p>
+<p><strong>4.</strong> Import the DT DTTASKSSEARCH.xml<br />
+Import the DT DTTASKSGRID.xml<br />
+Import the DT DTTASKSME.xml  </p>
+<p><strong>5.</strong> Import the DT DTPlanPolicyDetail.xml<br />
+Import the DT DTPlanPolicyDetailEdit.xml  </p>
+<p><strong>6.</strong> Import the DT DTSKUInventoryEdit.xml  </p>
+<h3 id="database-changes">Database changes</h3>
+<p><strong>3.</strong> Update the table CODELISTDETAIL in the WH  </p>
+<p><strong>4.</strong> Update the table CODELISTDETAIL in the WH  </p>
+<p><strong>7.</strong> Update the table CODELISTDETAIL in the WH  </p>
+<p><strong>8.</strong> Update the following tables in the WH<br />
+Update the table EVENTS<br />
+Update the table EVENTSREGISTRATION<br />
+Update the table CODELISTDETAIL  </p>
+<p><strong>9.</strong> Update vocabulary in SYS DB  </p>
+<h3 id="events">Events</h3>
+<p>59 – Load Unload<br />
+81 – Routing Set created<br />
+82 – Routing Set updated<br />
+121 – Container Consolidated<br />
+122 – Load Consolidated<br />
+234 – Container Unloaded<br />
+235 – Container Loaded<br />
+236 – Container Staged<br />
+287 – Un assign Outbound Order from Shipment<br />
+288 – Assign Outbound Order to Routing Set<br />
+289 – Un assign Outbound Order to Routing Set<br />
+301 – Flowthrough Order Created<br />
+302 – Flowthrough Order Updated<br />
+303 – Flowthrough Order Deleted<br />
+304 – Flowthrough Order Line Created<br />
+305 – Flowthrough Order Line Updated<br />
+306 – Flowthrough Order Line Deleted<br />
+418 – Route Stop Task Item Delivered<br />
+532 – Transshipment Order Created<br />
+533 – Transshipment Order Updated<br />
+602 – SCExpert Connect Plugin Status Changed  </p>
+<hr />
+<h2 id="release-notes-41212">Release Notes 4.12.1.2</h2>
+<h3 id="description_4">Description</h3>
+<ol>
+<li>The Receipt’s Start Receipt Date was updated every time a new load was
+created.
+Now the Receipt’s Start Receipt Date will only update when the first load is
+created.
+Workstation → Warehouse → Inbound Process → Receipts (RE)</li>
+<li>Import Plugins defined with DBTable BO Type were not functioning correctly.
+Fixed.</li>
+<li>The DeliveryExpert API did not function properly.
+Fixed</li>
+</ol>
+<h3 id="appendix_4">Appendix</h3>
+<p>1 Replace WMS.Logic.dll in the Workstation\bin folder.
+Replace WMS.Logic.dll in the RDT\bin folder.
+2 Replace SCExpertConnectFoundation.dll in the Services folder.
+3. Replace the entire Delivery/SCExpertDeliveryAPI folder.</p>
+<hr />
+<h2 id="release-notes-41211">Release Notes 4.12.1.1</h2>
+<h3 id="description_5">Description</h3>
+<ol>
+<li>When a message was sent to a group of mobile users, and the message was
+read by one of them, the other users did not receive the message.
+Now the RDT messages show for all users.
+Workstation → Warehouse Activity → Mobile Users Messages (MUM)</li>
+<li>The RDT message box did not support line breaks in Right To Left (RTL)
+languages.
+Now line breaks are supported in all RTL languages.</li>
+<li>Not all the RDT’s Mobile User Message box elements were translatable.
+Now all message box elements are translatable.</li>
+<li>Additional security measures were applied to the Print Client Token screen.
+Workstation → Setup→ Printers and Labels → Print Client Token (PCT)</li>
+<li>The Local Print Client was not able to connect to the SCExpert server after
+the Print Client Token was refreshed.
+Now the client connects successfully after the Token is refreshed.</li>
+<li>The Counter screen opened with no display.
+Now the Counters screen opens successfully.
+Workstation → Setup→ Warehouse Administration → Counters (CTR)</li>
+<li>The Counter Value field was mistakenly labeled Counter Interval.
+Now the field is labeled Counter Value.
+Workstation → Setup→ Warehouse Administration → Counters (CTR)</li>
+<li>The Multi Warehouse Queue flag is not showing in the insert mode of
+Message Queues tab.
+Now the Multi Warehouse Queue flag shows in the insert mode</li>
+<li>It was not possible to add attachments in the Attachment tab of the various
+screens when the Workstation was set to RTL languages.
+Now it is possible to add attachments when the Workstation is set to RTL
+languages.</li>
+<li>It was not possible to add a SKU image in the SKU General tab when the
+Workstation was set to RTL languages.
+Now it is possible to add SKU image when the Workstation is set to RTL
+languages.
+Workstation → Masterdata→ SKUs (ST)</li>
+<li>The Signature link did not open the confirmation image.
+Now, the image opens in a new tab when clicking the link.
+Workstation → Delivery→ Route Tasks (RA)</li>
+<li>Various changes to the application infrastructure.
+Delivery Expert React Application</li>
+<li>Added the business objects ValueAdded Orders and Assembly Orders.
+WebAPI</li>
+<li>The Order Automation Activities Assign Outbound Order to Wave and
+Assign Outbound Order to Shipment were not written properly to Audit,
+causing the service to get stuck.
+Now, the Assign Outbound Order to Wave and Assign Outbound Order to
+Shipment activities do not cause the Audit service to get stuck.</li>
+<li>The system had a limit on the size of the TransactionData stored as part of
+the Connect Transaction.
+Now the limit is removed.</li>
+<li>When a Scheduler Application was created or edited, the Application
+Trigger definitions were not set properly. Therefore, the Scheduler
+Application did not invoke in its’ scheduled time.
+Now, the Scheduler Applications invoke successfully.</li>
+<li>It was not possible to receive Load Putaway tasks using the RDT.
+Now, users can receive a Load Putaway task.</li>
+<li>The SCExpert Connect Import service failed to start after an upgrade of the
+system.</li>
+</ol>
+<h3 id="appendix_5">Appendix</h3>
+<p><strong>1.</strong> Replace WMS.Logic.dll in the RDT\bin folder.  </p>
+<p><strong>2.</strong> Replace the following CSS files:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- Replace Default Styles.css in RDT\m4nSkins\Default\CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Replace DefaultRTL Styles.css in RDT\m4nSkins\DefaultRTL\CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Replace HRT Styles.css in RDT\m4nSkins\HRT\CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Replace HRTRTL Styles.css in RDT\m4nSkins\HRTRTL\CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Replace TRT Styles.css in RDT\m4nSkins\TRT\CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Replace TRTRTL Styles.css in RDT\m4nSkins\TRTRTL\CSS\  </p>
+<p><strong>3.</strong> Replace the following in RDT\bin:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- WMS.MobileWebApp.dll<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- WMS.WebCtrl.dll<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- userMobileMessages.js in RDT\m4nclientscripts\  </p>
+<p><strong>5.</strong> Replace WMS.Logic.dll in Workstation\BIN.  </p>
+<p><strong>9.</strong> Replace the following in Workstation\m4nSkins\DefaultRTL\:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- DefaultRTL Styles.css in CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- DefaultRTL SkinConfig.xml<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- btnDownload.svg in Images\ActionBar\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Add folder Images\Icons\ (with all files)  </p>
+<p><strong>10.</strong> Replace in Workstation\m4nSkins\DefaultRTL\:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- DefaultRTL Styles.css in CSS\<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- DefaultRTL SkinConfig.xml<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- Add folder Images\Icons\ (with all files)  </p>
+<p><strong>11.</strong> Replace SignatureImage.aspx in Workstation\Screens.  </p>
+<p><strong>12.</strong> Replace the entire Delivery\SCExpertDeliveryReact\ folder (including all files).  </p>
+<p><strong>13.</strong> Replace:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- SCExpertWebAPI.dll in RestAPI\SCExpertWebAPI\bin<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- ExpertObjectMapper.dll<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- SCExpertDataServiceAPI.dll in RestAPI\SCExpertDataServiceAPI\bin  </p>
+<p><strong>14.</strong> Replace the following:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- WMS.Logic.dll in Workstation\bin<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- WMS.Lib.dll in Workstation\bin<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- WMS.Logic.dll in Services<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- WMS.Lib.dll in Services<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- WMS.SchedulerTasks.dll in Services  </p>
+<p><strong>15.</strong> Replace SCExpertConnectFoundation.dll in Services.  </p>
+<p><strong>16.</strong> Replace Made4Net.WebControls.dll in:  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- Workstation\bin<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- RDT\bin  </p>
+<h3 id="database-changes_1">Database changes</h3>
+<p><strong>4.</strong> Create the view vRemotePrintClients to the SYS DB<br />
+<strong>7.</strong> Update vocabulary in SYS DB.<br />
+<strong>13.</strong> Update the table APISERVICE in the SYS DB<br />
+Update the table SCEXPERTCONNECTPLUGINS in the SYS DB
+Update the table SCEXPERTCONNECTPLUGINPARAMS in the SYS DB
+Update the table SCEXPERTCONNECTPLUGINTRANSACTIONKEYS in the
+SYS DB<br />
+<strong>17.</strong> Update the table SYSPARAM in the SYS DB<br />
+<strong>18.</strong> Update the table MESSAGEQUEUES in the SYS DB</p>
+<h3 id="dts_1">DTs</h3>
+<p><strong>4.</strong> Import the DT DTRemotePrintClients.xml<br />
+<strong>7.</strong> Import the DT DTCounter.xml<br />
+<strong>8.</strong> Import the DT DTMessageQueuesInsert.xml</p>
+<h3 id="xml-based-screen-changes">XML Based Screen Changes</h3>
+<p><strong>6.</strong> Import the Screen Generator file CTR.xml</p>
 <hr />
               
             </div>
