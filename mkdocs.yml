@@ -12,13 +12,17 @@ nav:
   - Data Editors:
       - Expressions using functions: DataTables/dtExpressions.md
       - Expressions using Views : DataTables/sku_onpropertychange_po.md
-      - DT Property on multiple warehouses : DataTables/dt-use-dt-connection.md  
+      - DT Property on multiple warehouses : DataTables/dt-use-dt-connection.md
   - SCExpert Release Notes:
       - 4.12.1.x : ReleaseNotes/4.12.1.x.md
+  - Troubleshooting:
+      - Nuget Reference Error: troubleshooting/nuget-reference.md  
+  - Create Load Importer:
+      - Create Load Importer: LoadImporter/LoadImporter.md
+
 theme: 
     name: readthedocs
     primary : red
   
 extra_css:
   - style.css
-  
