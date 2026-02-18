@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dt-use-dt-connection/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/ReleaseNotes/4.12.1.x/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>DT Property on multiple warehouses - Made4Net Documentation</title>
+    <title>4.12.1.x - Made4Net Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "DT Property on multiple warehouses";
-        var mkdocs_page_input_path = "DataTables\\dt-use-dt-connection.md";
-        var mkdocs_page_url = "/Made4NetDocumentation/DataTables/dt-use-dt-connection/";
+        var mkdocs_page_name = "4.12.1.x";
+        var mkdocs_page_input_path = "ReleaseNotes\\4.12.1.x.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/ReleaseNotes/4.12.1.x/";
       </script>
     
     <!--[if lt IE 9]>
@@ -60,25 +60,21 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Data Editors</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../dtExpressions/">Expressions using functions</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sku_onpropertychange_po/">Expressions using Views</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">DT Property on multiple warehouses</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-happens-when-use-dt-connection-is-checked">What Happens When "Use DT Connection" is Checked?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-happens-when-it-is-unchecked">What Happens When It Is Unchecked?</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">4.12.1.x</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#release-notes-412128">Release Notes 4.12.1.28</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -95,8 +91,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Data Editors</li>
-      <li class="breadcrumb-item active">DT Property on multiple warehouses</li>
+          <li class="breadcrumb-item">SCExpert Release Notes</li>
+      <li class="breadcrumb-item active">4.12.1.x</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -105,34 +101,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="use-dt-connection-vs-warehouse-runtime-connection">Use DT Connection vs Warehouse Runtime Connection</h1>
-<h2 id="overview">Overview</h2>
-<p>When working with multiple warehouses (multiple database connections), 
-the <strong>"Use DT Connection"</strong> checkbox in DT Editor controls which database is used for making inserts, updates, deletes</p>
-<hr />
-<h2 id="what-happens-when-use-dt-connection-is-checked">What Happens When "Use DT Connection" is Checked?</h2>
-<p>If enabled:</p>
-<ul>
-<li>The DT will always use the database defined in the <strong>Connection</strong> field (e.g., APP).</li>
-<li>It will ignore the warehouse selected at login.</li>
-<li>All inserts and updates will go to that fixed database. This may cause data to be inserted into the wrong database.</li>
-</ul>
-<hr />
-<h2 id="what-happens-when-it-is-unchecked">What Happens When It Is Unchecked?</h2>
-<p>If disabled:</p>
-<ul>
-<li>The DT uses the <strong>currently selected warehouse connection</strong>.</li>
-<li>Inserts and updates go to the correct warehouse database.</li>
-<li>DBFIELD expressions execute against the active warehouse.</li>
-</ul>
-<p>This is the recommended setup for multiple warehouse environments.</p>
+                <h1 id="4121x-release-notes-hotfixes">4.12.1.x Release Notes &amp; Hotfixes</h1>
+<h2 id="release-notes-412128">Release Notes 4.12.1.28</h2>
 <hr />
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../sku_onpropertychange_po/" class="btn btn-neutral float-left" title="Expressions using Views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../ReleaseNotes/4.12.1.x/" class="btn btn-neutral float-right" title="4.12.1.x">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../DataTables/dt-use-dt-connection/" class="btn btn-neutral float-left" title="DT Property on multiple warehouses"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -155,10 +131,8 @@ the <strong>"Use DT Connection"</strong> checkbox in DT Editor controls which da
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../sku_onpropertychange_po/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../DataTables/dt-use-dt-connection/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../../ReleaseNotes/4.12.1.x/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

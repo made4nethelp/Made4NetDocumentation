@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/DataTables/sku_onpropertychange_po/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FileImports/FileImportfromWS/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Expressions using Views - Made4Net Documentation</title>
+    <title>File Import From Workstation - Made4Net Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Expressions using Views";
-        var mkdocs_page_input_path = "DataTables\\sku_onpropertychange_po.md";
-        var mkdocs_page_url = "/Made4NetDocumentation/DataTables/sku_onpropertychange_po/";
+        var mkdocs_page_name = "File Import From Workstation";
+        var mkdocs_page_input_path = "FileImports\\FileImportfromWS.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/FileImports/FileImportfromWS/";
       </script>
     
     <!--[if lt IE 9]>
@@ -48,10 +48,16 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">File Imports</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">File Import From Workstation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#server-disconnection">Server disconnection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sequence-of-execution">Sequence of execution</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Schedulers</span></p>
@@ -60,16 +66,12 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Data Editors</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../dtExpressions/">Expressions using functions</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Expressions using Views</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
@@ -91,8 +93,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Data Editors</li>
-      <li class="breadcrumb-item active">Expressions using Views</li>
+          <li class="breadcrumb-item">File Imports</li>
+      <li class="breadcrumb-item active">File Import From Workstation</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -101,120 +103,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="onpropertychange-event">onpropertychange Event</h1>
-<h2 id="overview">Overview</h2>
-<p>To go through onpropertychange take an example of purchase order screen from BE client and see how the <strong>PACK</strong> and <strong>PO Current Cost
-(UNITCOST)</strong> fields are automatically calculated when the <strong>SKU</strong> field
-changes in the Purchase Order Details screen.</p>
-<p>DT Used: <code>DT_PODETAIL_Insert</code>\
-Table Used: <code>vBE_POSKUPACK</code></p>
-<p>Event Trigger:</p>
-<pre><code>SKU:onpropertychange
+                <h1 id="csv-file-import-from-workstation-screen">CSV File import from Workstation screen</h1>
+<h2 id="server-disconnection">Server disconnection</h2>
+<p>Took GEM client as reference for documenting
+You can find all the imports from workstation changes at this m4nxfer folder</p>
+<pre><code>C:\M4NXFER\2024\ScreensImportFileButtonSetup
 </code></pre>
+<p>To add an import button on workstation screen use util function AddImportButton()
+Call this function where needed</p>
+<pre><code>Utils.AddImportButton(TEMasterInboundOrders, WMS.Lib.BOTypes.C_INBOUND)
+</code></pre>
+<p>Also add the following nodes to  SKinConfig.xml for import icons</p>
+<pre><code>        &lt;Image Name=&quot;ActionBarSAASImport&quot; Src=&quot;ActionBar/ActionBarSAASImport.png&quot; /&gt;
+        &lt;Image Name=&quot;ActionBarSAASExport&quot; Src=&quot;ActionBar/ActionBarSAASExport.png&quot; /&gt;
+</code></pre>
+<p>Custom DTs are prepared for the import screens</p>
+<p><strong>Timeout error on Postman</strong><br />
+<img alt="Timeout Error" src="img/timeouterror.png" /></p>
+<h2 id="sequence-of-execution">Sequence of execution</h2>
+<p>on calling AddImportButton() method, it opens a pop up screen</p>
+<p>AddImportButton() logic dynamically adds an import button to the tableEditor
+It brings the import icon image from skin configuration,  and injects javascript into the page.
+This JS opens a telerik RadWindow popup pointing to the DT which we send to importer.aspx :</p>
+<pre><code>../m4nScreens/importer.aspx?ImprtObj={BOname}
+</code></pre>
+<p>In the page load of importer </p>
+<p>after selecting csv file, on clicking import button it calls importer.aspx sending BOname as query params.
+In the page load of Importer, we capture the BOname from the query params and use it setting DefaultDt on the telerik popup page</p>
+<p>Code to Capture Query param and set it to default DT</p>
+<p>````
+  Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      Session("ImprtObj") = Request.QueryString("ImprtObj").ToLower()
+      divSummery.Visible = False
+      If Not IsPostBack Then
+      //Here defaultDT is assigned from query params
+          TEImporter.DefaultDT = String.Format("DTvObjectsImport{0}", Request.QueryString("ImprtObj"))
+          TEImporter.Restart()
+          divSummery.Visible = False
+      End If
+  End Sub</p>
+<p>```</p>
 <hr />
-<h1 id="1-pack-field-expression">1. PACK Field Expression</h1>
-<h2 id="expression-dt-editor">Expression (DT Editor)</h2>
-<pre><code>[0];DBFIELD;[1];DBFIELD;[2];
-DBFIELD:(CASE_PACK,vBE_POSKUPACK,
-SKU = '{0}' AND POID = '{1}' AND CONSIGNEE = '{2}'
-~FIELD:SKU~FIELD:POID~FIELD:CONSIGNEE,)
-</code></pre>
-<h2 id="meaning">Meaning</h2>
-<p>When SKU changes:</p>
-<ol>
-<li>System reads:<ul>
-<li>SKU (FIELD:SKU)</li>
-<li>POID (FIELD:POID)</li>
-<li>CONSIGNEE (FIELD:CONSIGNEE)</li>
-</ul>
-</li>
-<li>It replaces placeholders:<ul>
-<li><code>{0}</code> → SKU</li>
-<li><code>{1}</code> → POID</li>
-<li><code>{2}</code> → CONSIGNEE</li>
-</ul>
-</li>
-<li>Executes equivalent query:</li>
-</ol>
-<pre><code class="language-sql">SELECT CASE_PACK
-FROM vBE_POSKUPACK
-WHERE SKU = '&lt;SKU&gt;'
-  AND POID = '&lt;POID&gt;'
-  AND CONSIGNEE = '&lt;CONSIGNEE&gt;';
-</code></pre>
-<ol>
-<li>Returned value populates <strong>PACK</strong> field.</li>
-</ol>
-<hr />
-<h1 id="2-po-current-cost-unitcost-expression">2. PO Current Cost (UNITCOST) Expression</h1>
-<h2 id="expression">Expression</h2>
-<pre><code>[0];DBFIELD;[1];DBFIELD;[2];
-DBFIELD:(TOTCOST,vBE_POSKUDEFAULTCOST,
-SKU = '{0}' AND POID = '{1}' AND CONSIGNEE = '{2}'
-~FIELD:SKU~FIELD:POID~FIELD:CONSIGNEE,)
-</code></pre>
-<h2 id="meaning_1">Meaning</h2>
-<p>When SKU changes:</p>
-<ol>
-<li>System reads SKU, POID, CONSIGNEE.</li>
-<li>Replaces placeholders.</li>
-<li>Executes equivalent query:</li>
-</ol>
-<pre><code class="language-sql">SELECT TOTCOST
-FROM vBE_POSKUDEFAULTCOST
-WHERE SKU = '&lt;SKU&gt;'
-  AND POID = '&lt;POID&gt;'
-  AND CONSIGNEE = '&lt;CONSIGNEE&gt;';
-</code></pre>
-<ol>
-<li>Returned value populates <strong>PO Current Cost (UNITCOST)</strong>.</li>
-</ol>
-<hr />
-<h1 id="3-execution-flow">3. Execution Flow</h1>
-<pre><code>User changes SKU
-        ↓
-SKU:onpropertychange event fires
-        ↓
-PACK expression executes (DBFIELD)
-        ↓
-UNITCOST expression executes (DBFIELD)
-        ↓
-Values auto-populated in UI
-</code></pre>
-<hr />
-<h2 id="4-tabular-form-of-fields-returned-from-views">4. Tabular form of Fields returned from Views</h2>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Source View</th>
-<th>Column Returned</th>
-<th>Trigger</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PACK</td>
-<td>vBE_POSKUPACK</td>
-<td>CASE_PACK</td>
-<td>SKU:onpropertychange</td>
-</tr>
-<tr>
-<td>UNITCOST</td>
-<td>vBE_POSKUDEFAULTCOST</td>
-<td>TOTCOST</td>
-<td>SKU:onpropertychange</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p>In this way we can populate fields automatically through field expression.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../dtExpressions/" class="btn btn-neutral float-left" title="Expressions using functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../dt-use-dt-connection/" class="btn btn-neutral float-right" title="DT Property on multiple warehouses">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../FileImporter/" class="btn btn-neutral float-left" title="File Importer Troubleshoot"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../schedulers/view-to-table-scheduler/" class="btn btn-neutral float-right" title="ViewToTable Scheduler">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -237,10 +172,10 @@ Values auto-populated in UI
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../dtExpressions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../FileImporter/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../dt-use-dt-connection/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../schedulers/view-to-table-scheduler/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
