@@ -25,6 +25,10 @@
          <lastmod>2026-02-18</lastmod>
     </url>
     <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/LoadImporter/LoadImporter/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/ReleaseNotes/4.12.1.x/</loc>
          <lastmod>2026-02-18</lastmod>
     </url>
@@ -46,6 +50,10 @@
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/schedulers/view-to-table-scheduler/</loc>
+         <lastmod>2026-02-18</lastmod>
+    </url>
+    <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/troubleshooting/nuget-reference/</loc>
          <lastmod>2026-02-18</lastmod>
     </url>
 </urlset>
