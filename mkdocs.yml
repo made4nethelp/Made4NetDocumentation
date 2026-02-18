@@ -1,19 +1,24 @@
 site_name: Made4Net Documentation
 site_url: https://made4nethelp.github.io/Made4NetDocumentation/
 nav:
-  - SSL Certificate: 
-      - IIS HTTPS Configuration: sslcertificate/certificateInstallationSteps.md
+  - Configuration: 
+      - IIS HTTPS Configuration: configuration/certificateInstallationSteps.md
+      - Timeout Error: configuration/server-disconnection-max-pool.md
   - File Imports: 
       - File Importer Troubleshoot: FileImporter.md
+      - File Import From Workstation: FileImports/FileImportfromWS.md     
   - Schedulers:
       - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
   - Data Editors:
       - Expressions using functions: DataTables/dtExpressions.md
       - Expressions using Views : DataTables/sku_onpropertychange_po.md
       - DT Property on multiple warehouses : DataTables/dt-use-dt-connection.md  
+  - SCExpert Release Notes:
+      - 4.12.1.x : ReleaseNotes/4.12.1.x.md
 theme: 
     name: readthedocs
     primary : red
   
 extra_css:
   - style.css
+  
