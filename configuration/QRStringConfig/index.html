@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/configuration/QRStringConfig/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>QR String Configuration - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "QR String Configuration";
+        var mkdocs_page_input_path = "configuration\\QRStringConfig.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/configuration/QRStringConfig/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">QR String Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#screen-create-load-cld1">Screen: Create Load (CLD1)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#database-configuration-qrfieldconfig">Database Configuration – QRFIELDCONFIG</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-configuration">Example Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#qrstring-format">QRString Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#full-qr-example">Full QR Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#partial-qr-example">Partial QR Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-integration-cld1aspxvb">Code Integration – CLD1.aspx.vb</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#execution-flow">Execution Flow</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">QR String Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="qrstring-configuration-create-load-cld1">QRString Configuration – Create Load (CLD1)</h1>
+<h2 id="overview">Overview</h2>
+<p>On the <strong>Create Load (CLD1)</strong> RDT screen, a new field <strong>QRString</strong> was added.</p>
+<p>The purpose of this field is to allow users to scan or manually enter a comma-delimited string that contains multiple field values in a single input.</p>
+<p>These values are dynamically mapped to screen fields based on configuration in the <strong>QRFIELDCONFIG</strong> table in the App database.</p>
+<p><strong>CLD1 Screen</strong><br />
+<img alt="CLD1 Screen" src="../img/CreateLoadScreen.png" /></p>
+<p><strong>QRFieldConfig Table</strong><br />
+<img alt="QRFieldConfig Table" src="../img/QRConfigTable.png" /></p>
+<hr />
+<h2 id="screen-create-load-cld1">Screen: Create Load (CLD1)</h2>
+<p>QRString is entered by the user before processing.</p>
+<p>Example screen fields that can be populated via QRString for Create Load Screen:</p>
+<ul>
+<li>Load ID  </li>
+<li>Units  </li>
+<li>UOM  </li>
+<li>MFG Date  </li>
+<li>Batch  </li>
+</ul>
+<hr />
+<h2 id="database-configuration-qrfieldconfig">Database Configuration – QRFIELDCONFIG</h2>
+<p>QR parsing behavior is fully driven by the <strong>QRFIELDCONFIG</strong> table.</p>
+<p>Example query:</p>
+<pre><code class="language-sql">select * from QRFIELDCONFIG where [Screen Code] = 'CLD1'
+</code></pre>
+<h3 id="example-configuration">Example Configuration</h3>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>rdtfield</th>
+<th>datatype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>LOADID</td>
+<td>String</td>
+</tr>
+<tr>
+<td>4</td>
+<td>UNITS</td>
+<td>String</td>
+</tr>
+<tr>
+<td>5</td>
+<td>UOM</td>
+<td>String</td>
+</tr>
+<tr>
+<td>7</td>
+<td>MFGDATE</td>
+<td>date</td>
+</tr>
+<tr>
+<td>6</td>
+<td>BATCH</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>index</code> column determines which position in the QR string maps to which screen field.</p>
+<hr />
+<h2 id="qrstring-format">QRString Format</h2>
+<h3 id="full-qr-example">Full QR Example</h3>
+<pre><code>100001,10,EA,20260220,BAT101
+</code></pre>
+<p>Maps to:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LoadId</td>
+<td>100001</td>
+</tr>
+<tr>
+<td>Units</td>
+<td>10</td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>EA</td>
+</tr>
+<tr>
+<td>MFGDATE</td>
+<td>20260220</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BAT101</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="partial-qr-example">Partial QR Example</h3>
+<pre><code>100001,10,EA,,
+</code></pre>
+<p>User may leave values empty using delimiters.</p>
+<p>Empty values are still processed based on index position. We can Add required validations in the code if necessary.</p>
+<hr />
+<h2 id="code-integration-cld1aspxvb">Code Integration – CLD1.aspx.vb</h2>
+<p>In <code>CLD1.aspx.vb</code>, inside <code>doNext()</code>:</p>
+<pre><code class="language-vb">MobileUtils.ParseQRStringToFields(DO1, DO1.Value(&quot;QRSTRING&quot;), &quot;CLD1&quot;)
+DO1.Value(&quot;QRSTRING&quot;) = &quot;&quot;
+MobileUtils.PopulateQRFields(DO1)
+</code></pre>
+<h3 id="execution-flow">Execution Flow</h3>
+<ol>
+<li>Parse QRString</li>
+<li>Clear QRSTRING field</li>
+<li>Repopulate fields from session storage</li>
+</ol>
+<hr />
+<h1 id="mobileutils-implementation">MobileUtils Implementation</h1>
+<h2 id="parse-function">Parse Function</h2>
+<pre><code class="language-vb">Public Shared Sub ParseQRStringToFields(ByRef pDO As Made4Net.Mobile.WebCtrls.DataObject, qrstring As String, screenCode As String)
+</code></pre>
+<h3 id="what-this-function-does">What This Function Does</h3>
+<ol>
+<li>Validates QR string</li>
+<li>Reads QRFIELDCONFIG for the screen</li>
+<li>Splits QR string using configured delimiter</li>
+<li>Maps values by index</li>
+<li>Converts dates (if datatype = date)</li>
+<li>Assigns values to DataObject (DO1)</li>
+<li>Stores parsed values in Session dictionary</li>
+</ol>
+<hr />
+<h3 id="date-conversion-logic">Date Conversion Logic</h3>
+<p>If datatype = <code>date</code> and value length = 8:</p>
+<p>Input format:</p>
+<pre><code>ddMMyyyy
+</code></pre>
+<p>Converted to:</p>
+<pre><code>MM/dd/yyyy
+</code></pre>
+<p>Example:</p>
+<pre><code>20260220 → 02/20/2026
+</code></pre>
+<hr />
+<h3 id="session-storage">Session Storage</h3>
+<p>Parsed values are stored in session:</p>
+<pre><code class="language-vb">HttpContext.Current.Session(&quot;QRParsedFields&quot;)
+</code></pre>
+<p>Stored as:</p>
+<pre><code class="language-vb">Dictionary(Of String, String)
+</code></pre>
+<p>Example:</p>
+<pre><code>{
+  &quot;LOADID&quot; : &quot;100001&quot;,
+  &quot;UNITS&quot;  : &quot;10&quot;,
+  &quot;UOM&quot;    : &quot;EA&quot;
+}
+</code></pre>
+<hr />
+<h2 id="populate-function">Populate Function</h2>
+<pre><code class="language-vb">Public Shared Sub PopulateQRFields(ByRef pDO As Made4Net.Mobile.WebCtrls.DataObject)
+</code></pre>
+<h3 id="what-it-does">What It Does</h3>
+<ol>
+<li>Reads session dictionary</li>
+<li>Assigns values back to DO1</li>
+<li>Clears session after use</li>
+</ol>
+<pre><code class="language-vb">HttpContext.Current.Session.Remove(&quot;QRParsedFields&quot;)
+</code></pre>
+<hr />
+<h1 id="end-to-end-flow">End-to-End Flow</h1>
+<ol>
+<li>User enters/scans QRString</li>
+<li>System reads QRFIELDCONFIG</li>
+<li>Values split by delimiter</li>
+<li>Values mapped using index</li>
+<li>Date conversion applied if needed</li>
+<li>Fields assigned to DO1</li>
+<li>Values stored in session</li>
+<li>values auto-populated to Do1 object</li>
+<li>Session cleared</li>
+</ol>
+<hr />
+<h1 id="summary">Summary</h1>
+<p>The QRString implementation allows flexible, configuration-driven field population on mobile screens using a single scanned input.</p>
+<p>All mapping logic is controlled from the QRFIELDCONFIG table, making it reusable across multiple mobile screens.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../server-disconnection-max-pool/" class="btn btn-neutral float-left" title="Timeout Error"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../FileImporter/" class="btn btn-neutral float-right" title="File Importer Troubleshoot">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../server-disconnection-max-pool/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../FileImporter/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
