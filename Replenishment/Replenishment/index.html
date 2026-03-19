@@ -71,6 +71,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#purpose">Purpose</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#min-level-configuration-options">Min Level Configuration Options</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#note">Note</a>
     </li>
         </ul>
@@ -131,6 +133,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#important-notes_2">Important Notes</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#important-clarification">Important Clarification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flow">Flow:</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -187,6 +193,7 @@
                 <h1 id="replenishment-configuration-process">Replenishment Configuration &amp; Process</h1>
 <h2 id="configuration-setup">Configuration Setup</h2>
 <h3 id="pick-location-view-vpickloc">Pick Location View (vPickLoc)</h3>
+<p><a href="../img/PV.png"><img alt="Pick Location" src="../img/PV.png" /></a></p>
 <p>The core replenishment logic in <code>vPickLoc</code> is consistent across environments.<br />
 However, in some implementations, the view includes additional fields to support <strong>default UOM / case-level quantity calculations</strong>.</p>
 <hr />
@@ -216,6 +223,17 @@ However, in some implementations, the view includes additional fields to support
 <li>Supporting replenishment decision-making</li>
 </ul>
 <hr />
+<h3 id="min-level-configuration-options">Min Level Configuration Options</h3>
+<p>Min levels can be configured in two places:
+- <strong>SKU Screen</strong> — Set at the SKU level (limited visibility)
+- <strong>Pick Location Screen</strong> — Recommended; shows current qty, 
+  pending qty, and threshold status in one view</p>
+<blockquote>
+<p>Best Practice: Use the Pick Location screen when actively 
+monitoring or managing replenishment needs.</p>
+</blockquote>
+<p><a href="../img/SP.png"><img alt="SKU Policy" src="../img/SP.png" /></a></p>
+<hr />
 <h3 id="note">Note</h3>
 <ul>
 <li>Base replenishment logic exists in all environments  </li>
@@ -234,6 +252,7 @@ However, in some implementations, the view includes additional fields to support
 <hr />
 <h3 id="policy-configuration">Policy Configuration</h3>
 <p>Each Pick Location must have a <strong>Replenishment Policy</strong> assigned.</p>
+<p><a href="../img/replenishment_policy.png"><img alt="Replenishment Policy" src="../img/replenishment_policy.png" /></a></p>
 <p>Example:</p>
 <table>
 <thead>
@@ -286,7 +305,8 @@ Pick Location</code></p>
 </ul>
 <hr />
 <h3 id="below-threshold-logic">Below Threshold Logic</h3>
-<p>The most commonly used filters are:</p>
+<p>The most commonly used filters are:
+<a href="../img/SR.png"><img alt="Schedule Replenishment" src="../img/SR.png" /></a></p>
 <ul>
 <li><strong>Below Threshold Normal = Yes</strong></li>
 <li><strong>Below Threshold Hot = Yes</strong></li>
@@ -297,6 +317,7 @@ Pick Location</code></p>
 <li>Replenishment is required</li>
 </ul>
 <h3 id="understanding-pending-quantity">Understanding Pending Quantity</h3>
+<p><a href="../img/PD.png"><img alt="Pending Quantity" src="../img/PD.png" /></a></p>
 <ul>
 <li><strong>Pending Qty = 0</strong> → No replenishment planned</li>
 <li><strong>Pending Qty &gt; 0</strong> → Replenishment job already exists (planned but not completed)</li>
@@ -339,7 +360,8 @@ Pick Location</code></p>
 <h2 id="replenishment-jobs">Replenishment Jobs</h2>
 <h3 id="overview_2">Overview</h3>
 <p>The <strong>Replenishment Jobs</strong> screen displays all replenishment jobs created by the system after running Schedule Replenishment.</p>
-<p>Each job represents a movement of inventory from a <strong>storage location</strong> to a <strong>pick location</strong>.</p>
+<p>Each job represents a movement of inventory from a <strong>storage location</strong> to a <strong>pick location</strong>.
+<a href="../img/RJ.png"><img alt="Replenishment Jobs" src="../img/RJ.png" /></a></p>
 <hr />
 <h3 id="purpose_2">Purpose</h3>
 <ul>
@@ -393,6 +415,14 @@ Pick Location</code></p>
 <li>ii)Verify inventory availability</li>
 <li>Tasks are the final step in the replenishment process</li>
 </ul>
+<h3 id="important-clarification">Important Clarification</h3>
+<ul>
+<li><strong>Schedule Replenishment creates Replenishment Jobs (NOT Tasks directly)</strong></li>
+<li><strong>Tasks are created from Replenishment Jobs</strong>, only if:</li>
+<li>Replenishment Policy → <strong>Create Task = Yes</strong></li>
+</ul>
+<h3 id="flow">Flow:</h3>
+<p>Schedule Replenishment → Replenishment Job → Task → Execution (RDT)</p>
 <p>Together, they complete the replenishment lifecycle from storage → pick location.</p>
               
             </div>
