@@ -85,6 +85,7 @@ On sku Change a sql function fn_IsBatchRequired gets called
 ![TAGID Expression](./img/dt_field_expression.png)
 
 
+
 ## SQL Function: fn_IsBatchRequired
 
 ### Purpose

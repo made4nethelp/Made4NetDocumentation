@@ -4,11 +4,13 @@ nav:
   - Configuration: 
       - IIS HTTPS Configuration: configuration/certificateInstallationSteps.md
       - Timeout Error: configuration/server-disconnection-max-pool.md
+      - QR String Configuration: configuration/QRStringConfig.md
   - File Imports: 
       - File Importer Troubleshoot: FileImporter.md
       - File Import From Workstation: FileImports/FileImportfromWS.md     
   - Schedulers:
       - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
+      - Force User Logout: schedulers/force-user-logout.md
   - Data Editors:
       - Expressions using functions: DataTables/dtExpressions.md
       - Expressions using Views : DataTables/sku_onpropertychange_po.md
