@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/schedulers/force-user-logout/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Force User Logout - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Force User Logout";
+        var mkdocs_page_input_path = "schedulers\\force-user-logout.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/schedulers/force-user-logout/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/QRStringConfig/">QR String Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Force User Logout</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution-design">Solution Design</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#database-change">Database Change</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scheduler-behavior">Scheduler Behavior</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scheduler-implementation">Scheduler Implementation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#globalasax-enhancement">Global.asax Enhancement</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#event-used">Event Used</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logout-flow">Logout Flow</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#active-user-view">Active User View</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#test-case-1-force-logout">Test Case 1 – Force Logout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-case-2-license-cleanup">Test Case 2 – License Cleanup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-case-3-flag-reset">Test Case 3 – Flag Reset</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#benefits">Benefits</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Schedulers</li>
+      <li class="breadcrumb-item active">Force User Logout</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="force-user-logout-enhancement">Force User Logout Enhancement</h1>
+<h2 id="overview">Overview</h2>
+<p>A new force logout mechanism was implemented to allow the Scheduler Service to remotely log out users from the SCExpert web application.</p>
+<p>Since the Scheduler Service runs as a separate class library and does not have access to ASP.NET Session objects, direct session termination is not possible. To solve this, a database-driven force logout approach was introduced.</p>
+<hr />
+<h2 id="problem-statement">Problem Statement</h2>
+<p>The existing scheduler logout process attempted to terminate user sessions by:</p>
+<ul>
+<li>Removing records from <code>WHACTIVITY</code></li>
+<li>Removing records from <code>SYS_LICDT</code></li>
+<li>Disconnecting licenses</li>
+</ul>
+<p>Although these actions removed tracking and licensing information, users remained logged into the web application because their ASP.NET sessions were still active.</p>
+<p>The Scheduler Service does not have access to:</p>
+<ul>
+<li><code>HttpContext.Current</code></li>
+<li><code>Session</code></li>
+<li><code>FormsAuthentication</code></li>
+<li>User browser sessions</li>
+</ul>
+<p>Therefore, it cannot directly invoke:</p>
+<pre><code class="language-vb">Session.Abandon()
+FormsAuthentication.SignOut()
+</code></pre>
+<hr />
+<h2 id="solution-design">Solution Design</h2>
+<p>A new database flag named <code>FORCELOGOUT</code> was added to the <code>SYS_USERS</code> table.</p>
+<h3 id="database-change">Database Change</h3>
+<pre><code class="language-sql">ALTER TABLE SYS_USERS
+ADD FORCELOGOUT BIT NOT NULL DEFAULT(0)
+</code></pre>
+<h3 id="scheduler-behavior">Scheduler Behavior</h3>
+<p>When the scheduler determines that users should be logged out, it updates the user record:</p>
+<pre><code class="language-sql">UPDATE SYS_USERS
+SET FORCELOGOUT = 1
+WHERE USERNAME = @UserName
+</code></pre>
+<p>This marks the user for forced logout.</p>
+<hr />
+<h2 id="scheduler-implementation">Scheduler Implementation</h2>
+<p>The logout scheduler was updated to:</p>
+<ol>
+<li>Retrieve users from USERLOGINAUDIT</li>
+<li>Remove user activity records</li>
+<li>Set the FORCELOGOUT flag</li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-csharp">string sqlUpdate =
+    $&quot;UPDATE SYS_USERS &quot; +
+    $&quot;SET FORCELOGOUT = 1 &quot; +
+    $&quot;WHERE USERNAME = '{userName.Replace(\&quot;'\&quot;, \&quot;''\&quot;)}'&quot;;
+
+Made4Net.DataAccess.DataInterface.RunSQL(
+    sqlUpdate,
+    &quot;Made4NetSchema&quot;);
+</code></pre>
+<hr />
+<h2 id="globalasax-enhancement">Global.asax Enhancement</h2>
+<p>The ASP.NET application was updated to check the FORCELOGOUT flag during each request.</p>
+<h3 id="event-used">Event Used</h3>
+<pre><code class="language-vb">Application_AcquireRequestState
+</code></pre>
+<p>This event is automatically executed by ASP.NET during every request after session state has been loaded.</p>
+<h3 id="logout-flow">Logout Flow</h3>
+<ol>
+<li>User makes any request.</li>
+<li>Application_AcquireRequestState() executes.</li>
+<li>Application checks SYS_USERS.FORCELOGOUT.</li>
+<li>If the flag is set:</li>
+<li>Reset flag to 0</li>
+<li>Disconnect license</li>
+<li>Close database connections</li>
+<li>Sign out authentication</li>
+<li>Clear session</li>
+<li>Abandon session</li>
+</ol>
+<hr />
+<h2 id="active-user-view">Active User View</h2>
+<pre><code class="language-sql">CREATE VIEW vActiveUsersLast24Hours
+AS
+SELECT
+    USERNAME,
+    MAX(LOGINTIME) AS LASTLOGINTIME
+FROM USERLOGINAUDIT
+WHERE EVENTTYPE = 'SUCCESS'
+  AND LOGINTIME &gt;= DATEADD(HOUR, -24, GETDATE())
+GROUP BY USERNAME
+</code></pre>
+<p>Usage:</p>
+<pre><code class="language-sql">SELECT *
+FROM vActiveUsersLast24Hours
+ORDER BY LASTLOGINTIME DESC
+</code></pre>
+<hr />
+<h2 id="testing">Testing</h2>
+<h3 id="test-case-1-force-logout">Test Case 1 – Force Logout</h3>
+<pre><code class="language-sql">UPDATE SYS_USERS
+SET FORCELOGOUT = 1
+WHERE USERNAME = 'Admin'
+</code></pre>
+<p>Refresh the browser and verify the user is redirected to login.</p>
+<h3 id="test-case-2-license-cleanup">Test Case 2 – License Cleanup</h3>
+<p>Verify:
+- Session terminated
+- License disconnected
+- Database connections released</p>
+<h3 id="test-case-3-flag-reset">Test Case 3 – Flag Reset</h3>
+<p>Verify:</p>
+<pre><code class="language-sql">SELECT FORCELOGOUT
+FROM SYS_USERS
+WHERE USERNAME = 'Admin'
+</code></pre>
+<p>returns 0 after logout processing.</p>
+<hr />
+<h2 id="benefits">Benefits</h2>
+<ul>
+<li>No dependency on ASP.NET Session from Scheduler Service</li>
+<li>Uses standard ASP.NET request lifecycle</li>
+<li>Ensures proper license cleanup</li>
+<li>Supports remote logout of active users</li>
+<li>Minimal impact on existing application architecture</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../view-to-table-scheduler/" class="btn btn-neutral float-left" title="ViewToTable Scheduler"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../DataTables/dtExpressions/" class="btn btn-neutral float-right" title="Expressions using functions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../view-to-table-scheduler/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../DataTables/dtExpressions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
