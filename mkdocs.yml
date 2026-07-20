@@ -5,6 +5,7 @@ nav:
       - IIS HTTPS Configuration: configuration/certificateInstallationSteps.md
       - Timeout Error: configuration/server-disconnection-max-pool.md
       - QR String Configuration: configuration/QRStringConfig.md
+      - AWS S3 File Transfer: configuration/aws-s3-file-transfer.md
   - File Imports: 
       - File Importer Troubleshoot: FileImporter.md
       - File Import From Workstation: FileImports/FileImportfromWS.md     
