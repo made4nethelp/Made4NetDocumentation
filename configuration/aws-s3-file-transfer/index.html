@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/configuration/aws-s3-file-transfer/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>AWS S3 File Transfer - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AWS S3 File Transfer";
+        var mkdocs_page_input_path = "configuration\\aws-s3-file-transfer.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/configuration/aws-s3-file-transfer/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../QRStringConfig/">QR String Configuration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">AWS S3 File Transfer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-we-were-trying-to-achieve">What we were trying to achieve</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#folder-structure">Folder Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#s3-folder-structure">S3 Folder Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-1-install-aws-cli-on-the-windows-server">Step 1: Install AWS CLI on the Windows Server</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-2-configure-aws-access">Step 2: Configure AWS Access</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#better-option-for-aws-servers">Better option for AWS servers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-3-confirm-access-to-the-s3-bucket">Step 3: Confirm Access to the S3 Bucket</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-4-create-s3-folder-paths">Step 4: Create S3 Folder Paths</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-5-create-the-powershell-script">Step 5: Create the PowerShell Script</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-the-file-rename-works">How the File Rename Works</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-6-create-the-batch-file">Step 6: Create the Batch File</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-7-test-everything-manually">Step 7: Test Everything Manually</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#test-aws-cli">Test AWS CLI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-aws-identity">Test AWS identity</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-bucket-access">Test bucket access</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-one-file-manually">Test one file manually</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#verify-the-uploaded-file">Verify the uploaded file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-the-powershell-script">Test the PowerShell script</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-the-batch-file">Test the batch file</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-8-schedule-the-batch-file-in-windows-task-scheduler">Step 8: Schedule the Batch File in Windows Task Scheduler</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#general-tab">General tab</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#triggers-tab">Triggers tab</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#actions-tab">Actions tab</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#conditions-tab">Conditions tab</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#settings-tab">Settings tab</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-9-test-the-scheduled-task">Step 9: Test the Scheduled Task</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#monthly-logging">Monthly Logging</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#local-file-cleanup">Local File Cleanup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#useful-aws-commands">Useful AWS Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-files">List all files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-snapshot-files">List snapshot files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-putaway-files">List putaway files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-one-incorrect-s3-file">Delete one incorrect S3 file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preview-deleting-a-complete-prefix">Preview deleting a complete prefix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-a-complete-prefix">Delete a complete prefix</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#full-process-summary">Full Process Summary</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">AWS S3 File Transfer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="moving-magento-export-files-to-aws-s3">Moving Magento Export Files to AWS S3</h1>
+<h2 id="what-we-were-trying-to-achieve">What we were trying to achieve</h2>
+<p>Originally, the client files were transferred using FTP and WinSCP. The client later asked us to stop using the FTP location and send the files directly to an AWS S3 bucket.</p>
+<p>The idea was to make the process completely automatic.</p>
+<p>No one should have to:</p>
+<ul>
+<li>Log in to the AWS portal</li>
+<li>Open the S3 bucket manually</li>
+<li>Select files</li>
+<li>Upload files one by one</li>
+</ul>
+<p>The Windows server should automatically find the files, copy them to S3, rename the local files after a successful transfer, write logs, and clean up older local files.</p>
+<p>The complete flow looks like this:</p>
+<pre><code class="language-text">Local export folders
+        |
+        v
+MagentoAwsFileTransfers.bat
+        |
+        v
+MagentoAwsFileTransfers.ps1
+        |
+        v
+AWS CLI
+        |
+        v
+AWS S3 bucket
+</code></pre>
+<p>Windows Task Scheduler runs the <code>.bat</code> file automatically at the scheduled time.</p>
+<hr />
+<h2 id="folder-structure">Folder Structure</h2>
+<p>We kept the scripts, logs, and export files in separate locations.</p>
+<p>A sample local folder structure looks like this:</p>
+<pre><code class="language-text">C:\
+│
+├── Scripts\
+│   ├── MagentoAwsFileTransfers.bat
+│   ├── MagentoAwsFileTransfers.ps1
+│   │
+│   └── Logs\
+│       ├── MagentoAws-transfer-2026-06.log
+│       ├── MagentoAws-transfer-2026-07.log
+│       └── MagentoAwsFileTransfers-batch.log
+│
+├── Exports\
+│   ├── Snapshot20260701.xml
+│   ├── Snapshot20260702.csv
+│   └── Snapshot20260703_copied_to_s3.xml
+│
+└── MAGENTOEXPORT\
+    └── putaway\
+        ├── Putaway20260701.xml
+        ├── Putaway20260702.csv
+        └── Putaway20260703_copied_to_s3.csv
+</code></pre>
+<p>The main script files are stored here:</p>
+<pre><code class="language-text">C:\Scripts\MagentoAwsFileTransfers.bat
+C:\Scripts\MagentoAwsFileTransfers.ps1
+</code></pre>
+<p>The monthly logs are stored here:</p>
+<pre><code class="language-text">C:\Scripts\Logs
+</code></pre>
+<p>The first local source folder is:</p>
+<pre><code class="language-text">C:\Exports
+</code></pre>
+<p>The second local source folder is:</p>
+<pre><code class="language-text">C:\MAGENTOEXPORT\putaway
+</code></pre>
+<hr />
+<h2 id="s3-folder-structure">S3 Folder Structure</h2>
+<p>The S3 bucket used for this process was:</p>
+<pre><code class="language-text">s3://wms-snapshot/
+</code></pre>
+<p>The expected structure inside the bucket is similar to this:</p>
+<pre><code class="language-text">s3://wms-snapshot/
+└── inventory/
+    └── us/
+        ├── magentoexport/
+        │   └── snapshot/
+        │       ├── Snapshot20260701.xml
+        │       └── Snapshot20260702.csv
+        │
+        └── putaway/
+            ├── Putaway20260701.xml
+            └── Putaway20260702.csv
+</code></pre>
+<p>Files from:</p>
+<pre><code class="language-text">C:\Exports
+</code></pre>
+<p>are copied to:</p>
+<pre><code class="language-text">s3://wms-snapshot/inventory/us/magentoexport/snapshot/
+</code></pre>
+<p>Files from:</p>
+<pre><code class="language-text">C:\MAGENTOEXPORT\putaway
+</code></pre>
+<p>are copied to:</p>
+<pre><code class="language-text">s3://wms-snapshot/inventory/us/putaway/
+</code></pre>
+<p>Make sure the spelling in the script exactly matches the required S3 path.</p>
+<p>For example, these are different paths:</p>
+<pre><code class="language-text">magentoexport
+megentoexport
+</code></pre>
+<p>S3 treats them as different folder prefixes.</p>
+<hr />
+<h2 id="step-1-install-aws-cli-on-the-windows-server">Step 1: Install AWS CLI on the Windows Server</h2>
+<p>The PowerShell script uses AWS CLI commands such as:</p>
+<pre><code class="language-powershell">aws s3 cp
+</code></pre>
+<p>and:</p>
+<pre><code class="language-powershell">aws s3 ls
+</code></pre>
+<p>Because of that, AWS CLI must be installed on the same Windows server where the scheduled task runs.</p>
+<p>Create a temporary folder if it does not already exist:</p>
+<pre><code class="language-powershell">New-Item -Path &quot;C:\Temp&quot; -ItemType Directory -Force
+</code></pre>
+<p>Download the AWS CLI installer:</p>
+<pre><code class="language-powershell">Invoke-WebRequest `
+    &quot;https://awscli.amazonaws.com/AWSCLIV2.msi&quot; `
+    -OutFile &quot;C:\Temp\AWSCLIV2.msi&quot;
+</code></pre>
+<p>Install it:</p>
+<pre><code class="language-powershell">Start-Process msiexec.exe `
+    -ArgumentList '/i &quot;C:\Temp\AWSCLIV2.msi&quot; /quiet' `
+    -Wait
+</code></pre>
+<p>After installation, close PowerShell and open it again.</p>
+<p>Then check the installation:</p>
+<pre><code class="language-powershell">aws --version
+</code></pre>
+<p>You should see output similar to:</p>
+<pre><code class="language-text">aws-cli/2.x.x Python/3.x Windows/Server
+</code></pre>
+<p>When this error appears:</p>
+<pre><code class="language-text">aws is not recognized as the name of a cmdlet
+</code></pre>
+<p>it normally means one of these things:</p>
+<ul>
+<li>AWS CLI is not installed</li>
+<li>PowerShell was not reopened after installation</li>
+<li>The AWS CLI installation folder is not available in the system PATH</li>
+</ul>
+<hr />
+<h2 id="step-2-configure-aws-access">Step 2: Configure AWS Access</h2>
+<p>AWS CLI needs permission to access the S3 bucket.</p>
+<p>Run:</p>
+<pre><code class="language-powershell">aws configure
+</code></pre>
+<p>It asks for:</p>
+<pre><code class="language-text">AWS Access Key ID
+AWS Secret Access Key
+Default region name
+Default output format
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-text">AWS Access Key ID:     ***************
+AWS Secret Access Key: ***************
+Default region name:   us-east-1
+Default output format: json
+</code></pre>
+<p>The AWS access key must belong to a user or role that has permission to:</p>
+<pre><code class="language-text">List the bucket
+Upload files
+Read files, if required
+Delete files, if required
+</code></pre>
+<p>After configuring it, confirm which AWS identity is being used:</p>
+<pre><code class="language-powershell">aws sts get-caller-identity
+</code></pre>
+<p>The command should return account and user or role information.</p>
+<h3 id="better-option-for-aws-servers">Better option for AWS servers</h3>
+<p>When the Windows server is an AWS EC2 server, the better option is to attach an IAM role to the EC2 instance.</p>
+<p>With an EC2 IAM role:</p>
+<ul>
+<li>Access keys do not need to be stored in the script</li>
+<li>Access keys do not need to be stored in the <code>.bat</code> file</li>
+<li>AWS CLI automatically receives temporary credentials</li>
+<li>Credential rotation is handled by AWS</li>
+</ul>
+<p>When an IAM role is available, we do not need to run:</p>
+<pre><code class="language-powershell">aws configure
+</code></pre>
+<p>The script can directly use the role assigned to the server.</p>
+<hr />
+<h2 id="step-3-confirm-access-to-the-s3-bucket">Step 3: Confirm Access to the S3 Bucket</h2>
+<p>Before working on the script, we tested the connection manually.</p>
+<p>To list the top level of the bucket:</p>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/
+</code></pre>
+<p>Example output:</p>
+<pre><code class="language-text">                           PRE inventory/
+2025-06-24 16:53:54   15475631 Snapshot20250607.xml
+</code></pre>
+<p>To list everything inside the bucket recursively:</p>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/ --recursive
+</code></pre>
+<p>This is useful because S3 sometimes appears to have repeated folder names.</p>
+<p>For example:</p>
+<pre><code class="language-text">inventory/inventory/file.xml
+</code></pre>
+<p>may exist when a file was accidentally uploaded to:</p>
+<pre><code class="language-text">s3://wms-snapshot/inventory/inventory/
+</code></pre>
+<p>To check the snapshot location:</p>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/inventory/us/magentoexport/snapshot/
+</code></pre>
+<p>To check the putaway location:</p>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/inventory/us/putaway/
+</code></pre>
+<p>Always add the final slash when checking an S3 folder-like path:</p>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/inventory/us/
+</code></pre>
+<hr />
+<h2 id="step-4-create-s3-folder-paths">Step 4: Create S3 Folder Paths</h2>
+<p>S3 does not really have folders in the same way Windows does.</p>
+<p>An S3 folder is only part of an object name called a key or prefix.</p>
+<p>For example:</p>
+<pre><code class="language-text">inventory/us/magentoexport/snapshot/file.xml
+</code></pre>
+<p>The folder-like part is:</p>
+<pre><code class="language-text">inventory/us/magentoexport/snapshot/
+</code></pre>
+<p>Normally, there is no need to create the path first. Uploading a file automatically creates the path.</p>
+<p>But when we need an empty folder-like path, we can run:</p>
+<pre><code class="language-powershell">aws s3api put-object `
+    --bucket wms-snapshot `
+    --key inventory/us/magentoexport/snapshot/
+</code></pre>
+<p>To create the putaway path:</p>
+<pre><code class="language-powershell">aws s3api put-object `
+    --bucket wms-snapshot `
+    --key inventory/us/putaway/
+</code></pre>
+<hr />
+<h2 id="step-5-create-the-powershell-script">Step 5: Create the PowerShell Script</h2>
+<p>Create this file:</p>
+<pre><code class="language-text">C:\Scripts\MagentoAwsFileTransfers.ps1
+</code></pre>
+<p>This PowerShell script does the main work.</p>
+<p>It:</p>
+<ul>
+<li>Looks for <code>.xml</code> and <code>.csv</code> files</li>
+<li>Ignores files already ending with <code>_copied_to_s3</code></li>
+<li>Copies eligible files to S3</li>
+<li>Renames local files after a successful upload</li>
+<li>Writes a monthly log</li>
+<li>Counts successful and failed transfers</li>
+<li>Deletes copied local files older than seven days</li>
+</ul>
+<pre><code class="language-powershell"># MagentoAwsFileTransfers.ps1
+
+# ============================================================
+# Configuration
+# ============================================================
+
+$bucketName = &quot;wms-snapshot&quot;
+
+$exportSourceFolder = &quot;C:\Exports&quot;
+$exportDestination = &quot;inventory/us/magentoexport/snapshot/&quot;
+
+$putawaySourceFolder = &quot;C:\MAGENTOEXPORT\putaway&quot;
+$putawayDestination = &quot;inventory/us/putaway/&quot;
+
+$logDirectory = &quot;C:\Scripts\Logs&quot;
+$retentionDays = 7
+
+# ============================================================
+# Monthly Logging
+# ============================================================
+
+$logMonth = (Get-Date).ToString(&quot;yyyy-MM&quot;)
+
+$logFile = Join-Path `
+    -Path $logDirectory `
+    -ChildPath &quot;MagentoAws-transfer-$logMonth.log&quot;
+
+if (-not (Test-Path -LiteralPath $logDirectory)) {
+    New-Item `
+        -Path $logDirectory `
+        -ItemType Directory `
+        -Force | Out-Null
+}
+
+function Write-Log {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Message
+    )
+
+    $timestamp = Get-Date -Format &quot;yyyy-MM-dd HH:mm:ss&quot;
+    $logEntry = &quot;$timestamp  $Message&quot;
+
+    Add-Content `
+        -LiteralPath $logFile `
+        -Value $logEntry `
+        -Encoding UTF8
+
+    Write-Host $logEntry
+}
+
+# ============================================================
+# Copy Files to S3
+# ============================================================
+
+function Copy-FilesToS3 {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$SourceFolder,
+
+        [Parameter(Mandatory = $true)]
+        [string]$DestinationPrefix
+    )
+
+    $result = [PSCustomObject]@{
+        Found   = 0
+        Copied  = 0
+        Failed  = 0
+        Renamed = 0
+    }
+
+    Write-Log &quot;Checking source folder: $SourceFolder&quot;
+
+    if (-not (Test-Path -LiteralPath $SourceFolder)) {
+        Write-Log &quot;ERROR: Source folder does not exist: $SourceFolder&quot;
+        return $result
+    }
+
+    $files = Get-ChildItem `
+        -LiteralPath $SourceFolder `
+        -File `
+        -ErrorAction Stop |
+        Where-Object {
+            $_.Extension.ToLowerInvariant() -in @(&quot;.xml&quot;, &quot;.csv&quot;) -and
+            $_.BaseName -notmatch &quot;_copied_to_s3(?:_\d+)?$&quot;
+        }
+
+    $result.Found = @($files).Count
+
+    Write-Log &quot;S3 destination: s3://$bucketName/$DestinationPrefix&quot;
+    Write-Log &quot;Eligible files found: $($result.Found)&quot;
+
+    if ($result.Found -eq 0) {
+        Write-Log &quot;No new XML or CSV files were found in $SourceFolder&quot;
+        return $result
+    }
+
+    foreach ($file in $files) {
+        $s3Key = &quot;$DestinationPrefix$($file.Name)&quot;
+        $s3Location = &quot;s3://$bucketName/$s3Key&quot;
+
+        Write-Log &quot;Copying file: $($file.FullName)&quot;
+        Write-Log &quot;Copying to: $s3Location&quot;
+
+        $awsOutput = &amp; aws s3 cp `
+            $file.FullName `
+            $s3Location `
+            --only-show-errors 2&gt;&amp;1
+
+        $awsExitCode = $LASTEXITCODE
+
+        if ($awsExitCode -ne 0) {
+            $result.Failed++
+
+            Write-Log &quot;ERROR: Failed to copy $($file.Name)&quot;
+            Write-Log &quot;AWS exit code: $awsExitCode&quot;
+
+            if ($awsOutput) {
+                Write-Log &quot;AWS response: $($awsOutput -join ' ')&quot;
+            }
+
+            continue
+        }
+
+        $result.Copied++
+
+        Write-Log &quot;SUCCESS: Copied $($file.Name) to S3&quot;
+
+        $newFileName = &quot;{0}_copied_to_s3{1}&quot; -f `
+            $file.BaseName,
+            $file.Extension
+
+        $newFilePath = Join-Path `
+            -Path $file.DirectoryName `
+            -ChildPath $newFileName
+
+        if (Test-Path -LiteralPath $newFilePath) {
+            $counter = 1
+
+            do {
+                $newFileName = &quot;{0}_copied_to_s3_{1}{2}&quot; -f `
+                    $file.BaseName,
+                    $counter,
+                    $file.Extension
+
+                $newFilePath = Join-Path `
+                    -Path $file.DirectoryName `
+                    -ChildPath $newFileName
+
+                $counter++
+            }
+            while (Test-Path -LiteralPath $newFilePath)
+        }
+
+        try {
+            Rename-Item `
+                -LiteralPath $file.FullName `
+                -NewName $newFileName `
+                -ErrorAction Stop
+
+            $result.Renamed++
+
+            Write-Log &quot;SUCCESS: Renamed local file to $newFileName&quot;
+        }
+        catch {
+            Write-Log &quot;WARNING: File was copied to S3, but local rename failed.&quot;
+            Write-Log &quot;Rename error: $($_.Exception.Message)&quot;
+        }
+    }
+
+    return $result
+}
+
+# ============================================================
+# Delete Old Local Copied Files
+# ============================================================
+
+function Remove-OldCopiedLocalFiles {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$FolderPath,
+
+        [int]$Days = 7
+    )
+
+    $result = [PSCustomObject]@{
+        Deleted = 0
+        Failed  = 0
+    }
+
+    if (-not (Test-Path -LiteralPath $FolderPath)) {
+        Write-Log &quot;WARNING: Cleanup folder does not exist: $FolderPath&quot;
+        return $result
+    }
+
+    $cutoffDate = (Get-Date).AddDays(-$Days)
+
+    Write-Log &quot;Checking $FolderPath for copied files older than $Days days&quot;
+    Write-Log &quot;Cleanup cutoff date: $cutoffDate&quot;
+
+    $oldFiles = Get-ChildItem `
+        -LiteralPath $FolderPath `
+        -File |
+        Where-Object {
+            $_.Extension.ToLowerInvariant() -in @(&quot;.xml&quot;, &quot;.csv&quot;) -and
+            $_.BaseName -match &quot;_copied_to_s3(?:_\d+)?$&quot; -and
+            $_.LastWriteTime -lt $cutoffDate
+        }
+
+    if (@($oldFiles).Count -eq 0) {
+        Write-Log &quot;No copied files older than $Days days were found in $FolderPath&quot;
+        return $result
+    }
+
+    foreach ($file in $oldFiles) {
+        try {
+            Remove-Item `
+                -LiteralPath $file.FullName `
+                -Force `
+                -ErrorAction Stop
+
+            $result.Deleted++
+
+            Write-Log &quot;DELETED: $($file.FullName)&quot;
+            Write-Log &quot;Last modified date: $($file.LastWriteTime)&quot;
+        }
+        catch {
+            $result.Failed++
+
+            Write-Log &quot;ERROR: Failed to delete $($file.FullName)&quot;
+            Write-Log &quot;Delete error: $($_.Exception.Message)&quot;
+        }
+    }
+
+    return $result
+}
+
+# ============================================================
+# Main Process
+# ============================================================
+
+Write-Log &quot;============================================================&quot;
+Write-Log &quot;Magento AWS file transfer started&quot;
+Write-Log &quot;Server: $env:COMPUTERNAME&quot;
+Write-Log &quot;Windows account: $env:USERDOMAIN\$env:USERNAME&quot;
+
+if (-not (Get-Command aws -ErrorAction SilentlyContinue)) {
+    Write-Log &quot;ERROR: AWS CLI is not installed or is not available in PATH&quot;
+    exit 1
+}
+
+Write-Log &quot;AWS CLI was found&quot;
+
+$identityOutput = &amp; aws sts get-caller-identity --output json 2&gt;&amp;1
+$identityExitCode = $LASTEXITCODE
+
+if ($identityExitCode -ne 0) {
+    Write-Log &quot;ERROR: AWS authentication failed&quot;
+    Write-Log &quot;AWS response: $($identityOutput -join ' ')&quot;
+    exit 1
+}
+
+Write-Log &quot;AWS authentication was successful&quot;
+
+$exportResult = Copy-FilesToS3 `
+    -SourceFolder $exportSourceFolder `
+    -DestinationPrefix $exportDestination
+
+$putawayResult = Copy-FilesToS3 `
+    -SourceFolder $putawaySourceFolder `
+    -DestinationPrefix $putawayDestination
+
+$exportCleanup = Remove-OldCopiedLocalFiles `
+    -FolderPath $exportSourceFolder `
+    -Days $retentionDays
+
+$putawayCleanup = Remove-OldCopiedLocalFiles `
+    -FolderPath $putawaySourceFolder `
+    -Days $retentionDays
+
+$totalFound = $exportResult.Found + $putawayResult.Found
+$totalCopied = $exportResult.Copied + $putawayResult.Copied
+$totalFailed = $exportResult.Failed + $putawayResult.Failed
+$totalRenamed = $exportResult.Renamed + $putawayResult.Renamed
+$totalDeleted = $exportCleanup.Deleted + $putawayCleanup.Deleted
+$totalDeleteFailed = $exportCleanup.Failed + $putawayCleanup.Failed
+
+Write-Log &quot;------------------------------------------------------------&quot;
+Write-Log &quot;Transfer summary&quot;
+Write-Log &quot;Files found: $totalFound&quot;
+Write-Log &quot;Files copied to S3: $totalCopied&quot;
+Write-Log &quot;Copy failures: $totalFailed&quot;
+Write-Log &quot;Local files renamed: $totalRenamed&quot;
+Write-Log &quot;Old local copied files deleted: $totalDeleted&quot;
+Write-Log &quot;Local cleanup failures: $totalDeleteFailed&quot;
+Write-Log &quot;Magento AWS file transfer completed&quot;
+Write-Log &quot;============================================================&quot;
+
+if ($totalFailed -gt 0 -or $totalDeleteFailed -gt 0) {
+    exit 1
+}
+
+exit 0
+</code></pre>
+<hr />
+<h2 id="how-the-file-rename-works">How the File Rename Works</h2>
+<p>Suppose the local source folder contains:</p>
+<pre><code class="language-text">Snapshot20260720.xml
+</code></pre>
+<p>After the file is copied successfully to S3, the local file becomes:</p>
+<pre><code class="language-text">Snapshot20260720_copied_to_s3.xml
+</code></pre>
+<p>For a CSV file:</p>
+<pre><code class="language-text">Snapshot20260720.csv
+</code></pre>
+<p>it becomes:</p>
+<pre><code class="language-text">Snapshot20260720_copied_to_s3.csv
+</code></pre>
+<p>The next time the script runs, it ignores files ending with:</p>
+<pre><code class="language-text">_copied_to_s3
+</code></pre>
+<p>This prevents the same file from being copied again.</p>
+<p>The S3 file keeps its original name:</p>
+<pre><code class="language-text">Snapshot20260720.xml
+</code></pre>
+<p>Only the local file is renamed.</p>
+<hr />
+<h2 id="step-6-create-the-batch-file">Step 6: Create the Batch File</h2>
+<p>Create this file:</p>
+<pre><code class="language-text">C:\Scripts\MagentoAwsFileTransfers.bat
+</code></pre>
+<pre><code class="language-bat">@echo off
+setlocal
+
+set &quot;SCRIPT_PATH=C:\Scripts\MagentoAwsFileTransfers.ps1&quot;
+set &quot;BAT_LOG=C:\Scripts\Logs\MagentoAwsFileTransfers-batch.log&quot;
+
+echo ============================================================ &gt;&gt; &quot;%BAT_LOG%&quot;
+echo [%date% %time%] Magento AWS batch process started &gt;&gt; &quot;%BAT_LOG%&quot;
+
+powershell.exe ^
+  -NoProfile ^
+  -NonInteractive ^
+  -ExecutionPolicy Bypass ^
+  -File &quot;%SCRIPT_PATH%&quot; &gt;&gt; &quot;%BAT_LOG%&quot; 2&gt;&amp;1
+
+set &quot;EXIT_CODE=%ERRORLEVEL%&quot;
+
+echo [%date% %time%] PowerShell exit code: %EXIT_CODE% &gt;&gt; &quot;%BAT_LOG%&quot;
+echo [%date% %time%] Magento AWS batch process completed &gt;&gt; &quot;%BAT_LOG%&quot;
+echo ============================================================ &gt;&gt; &quot;%BAT_LOG%&quot;
+
+endlocal &amp; exit /b %EXIT_CODE%
+</code></pre>
+<p>The batch file:</p>
+<ol>
+<li>Starts PowerShell</li>
+<li>Runs <code>MagentoAwsFileTransfers.ps1</code></li>
+<li>Writes console messages to a batch log</li>
+<li>Returns the PowerShell exit code to Task Scheduler</li>
+</ol>
+<hr />
+<h2 id="step-7-test-everything-manually">Step 7: Test Everything Manually</h2>
+<p>Before creating the scheduled task, test each part separately.</p>
+<h3 id="test-aws-cli">Test AWS CLI</h3>
+<pre><code class="language-powershell">aws --version
+</code></pre>
+<h3 id="test-aws-identity">Test AWS identity</h3>
+<pre><code class="language-powershell">aws sts get-caller-identity
+</code></pre>
+<h3 id="test-bucket-access">Test bucket access</h3>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/
+</code></pre>
+<h3 id="test-one-file-manually">Test one file manually</h3>
+<pre><code class="language-powershell">aws s3 cp `
+    &quot;C:\Exports\TestSnapshot.xml&quot; `
+    &quot;s3://wms-snapshot/inventory/us/magentoexport/snapshot/TestSnapshot.xml&quot;
+</code></pre>
+<h3 id="verify-the-uploaded-file">Verify the uploaded file</h3>
+<pre><code class="language-powershell">aws s3 ls `
+    &quot;s3://wms-snapshot/inventory/us/magentoexport/snapshot/&quot; `
+    --recursive
+</code></pre>
+<h3 id="test-the-powershell-script">Test the PowerShell script</h3>
+<pre><code class="language-powershell">powershell.exe `
+    -NoProfile `
+    -ExecutionPolicy Bypass `
+    -File &quot;C:\Scripts\MagentoAwsFileTransfers.ps1&quot;
+</code></pre>
+<h3 id="test-the-batch-file">Test the batch file</h3>
+<pre><code class="language-cmd">C:\Scripts\MagentoAwsFileTransfers.bat
+</code></pre>
+<p>Only after the PowerShell and batch files both work manually should the scheduled task be created.</p>
+<hr />
+<h2 id="step-8-schedule-the-batch-file-in-windows-task-scheduler">Step 8: Schedule the Batch File in Windows Task Scheduler</h2>
+<p>Open Windows Task Scheduler and select:</p>
+<pre><code class="language-text">Create Task
+</code></pre>
+<h3 id="general-tab">General tab</h3>
+<p>Use a name such as:</p>
+<pre><code class="language-text">Magento AWS File Transfers
+</code></pre>
+<p>Select:</p>
+<pre><code class="language-text">Run whether user is logged on or not
+Run with highest privileges
+</code></pre>
+<p>The selected account must have access to:</p>
+<pre><code class="language-text">C:\Scripts
+C:\Scripts\Logs
+C:\Exports
+C:\MAGENTOEXPORT\putaway
+</code></pre>
+<p>The same account must also have AWS access.</p>
+<h3 id="triggers-tab">Triggers tab</h3>
+<p>Create the required schedule.</p>
+<p>Example:</p>
+<pre><code class="language-text">Daily at 6:30 AM
+</code></pre>
+<p>Make sure:</p>
+<pre><code class="language-text">Enabled
+</code></pre>
+<p>is checked.</p>
+<h3 id="actions-tab">Actions tab</h3>
+<p>Set:</p>
+<pre><code class="language-text">Program/script:
+C:\Windows\System32\cmd.exe
+</code></pre>
+<pre><code class="language-text">Add arguments:
+/c &quot;C:\Scripts\MagentoAwsFileTransfers.bat&quot;
+</code></pre>
+<pre><code class="language-text">Start in:
+C:\Scripts
+</code></pre>
+<h3 id="conditions-tab">Conditions tab</h3>
+<p>For a server task, uncheck conditions that may prevent execution:</p>
+<pre><code class="language-text">Start the task only if the computer is idle
+Start the task only if the computer is on AC power
+Stop if the computer switches to battery power
+</code></pre>
+<h3 id="settings-tab">Settings tab</h3>
+<p>Enable:</p>
+<pre><code class="language-text">Allow task to be run on demand
+Run task as soon as possible after a scheduled start is missed
+</code></pre>
+<p>For failures:</p>
+<pre><code class="language-text">Restart every 5 minutes
+Attempt to restart up to 3 times
+</code></pre>
+<p>For overlapping runs:</p>
+<pre><code class="language-text">Do not start a new instance
+</code></pre>
+<hr />
+<h2 id="step-9-test-the-scheduled-task">Step 9: Test the Scheduled Task</h2>
+<p>After saving the task:</p>
+<ol>
+<li>Right-click the task</li>
+<li>Select <strong>Run</strong></li>
+<li>Wait for the task to finish</li>
+<li>Refresh Task Scheduler</li>
+<li>Check the last run result</li>
+<li>Check the logs</li>
+<li>Check the S3 destination</li>
+<li>Check the renamed local files</li>
+</ol>
+<p>A successful task normally shows:</p>
+<pre><code class="language-text">The operation completed successfully. (0x0)
+</code></pre>
+<p>When Task Scheduler shows:</p>
+<pre><code class="language-text">The task has not yet run. (0x41303)
+</code></pre>
+<p>check:</p>
+<ul>
+<li>The trigger is enabled</li>
+<li>The scheduled time is correct</li>
+<li>Idle and power conditions are disabled</li>
+<li>The task account has the correct permissions</li>
+<li>The task account password is current</li>
+<li>The batch file path is correct</li>
+<li>The <code>Start in</code> folder is configured</li>
+</ul>
+<p>Enable task history through:</p>
+<pre><code class="language-text">Task Scheduler
+→ Action
+→ Enable All Tasks History
+</code></pre>
+<hr />
+<h2 id="monthly-logging">Monthly Logging</h2>
+<p>The log file name changes every month.</p>
+<p>Example:</p>
+<pre><code class="language-text">C:\Scripts\Logs\MagentoAws-transfer-2026-07.log
+</code></pre>
+<p>The script appends new entries instead of overwriting previous entries.</p>
+<p>Example:</p>
+<pre><code class="language-text">2026-07-20 06:30:00  Magento AWS file transfer started
+2026-07-20 06:30:01  AWS authentication was successful
+2026-07-20 06:30:01  Eligible files found: 2
+2026-07-20 06:30:02  SUCCESS: Copied Snapshot20260720.xml to S3
+2026-07-20 06:30:02  SUCCESS: Renamed local file to Snapshot20260720_copied_to_s3.xml
+2026-07-20 06:30:03  Files copied to S3: 2
+2026-07-20 06:30:03  Copy failures: 0
+2026-07-20 06:30:03  Magento AWS file transfer completed
+</code></pre>
+<hr />
+<h2 id="local-file-cleanup">Local File Cleanup</h2>
+<p>After a successful copy, the local file remains with the copied flag:</p>
+<pre><code class="language-text">Snapshot20260720_copied_to_s3.xml
+</code></pre>
+<p>The cleanup function deletes only copied <code>.xml</code> and <code>.csv</code> files older than the retention period.</p>
+<p>The default retention is:</p>
+<pre><code class="language-powershell">$retentionDays = 7
+</code></pre>
+<p>New files that have not yet been copied are not deleted.</p>
+<hr />
+<h2 id="useful-aws-commands">Useful AWS Commands</h2>
+<h3 id="list-all-files">List all files</h3>
+<pre><code class="language-powershell">aws s3 ls s3://wms-snapshot/ --recursive
+</code></pre>
+<h3 id="list-snapshot-files">List snapshot files</h3>
+<pre><code class="language-powershell">aws s3 ls `
+    s3://wms-snapshot/inventory/us/magentoexport/snapshot/ `
+    --recursive
+</code></pre>
+<h3 id="list-putaway-files">List putaway files</h3>
+<pre><code class="language-powershell">aws s3 ls `
+    s3://wms-snapshot/inventory/us/putaway/ `
+    --recursive
+</code></pre>
+<h3 id="delete-one-incorrect-s3-file">Delete one incorrect S3 file</h3>
+<pre><code class="language-powershell">aws s3 rm `
+    &quot;s3://wms-snapshot/inventory/us/magentoexport/snapshot/IncorrectFile.xml&quot;
+</code></pre>
+<h3 id="preview-deleting-a-complete-prefix">Preview deleting a complete prefix</h3>
+<pre><code class="language-powershell">aws s3 rm `
+    &quot;s3://wms-snapshot/inventory/us/unwanted-folder/&quot; `
+    --recursive `
+    --dryrun
+</code></pre>
+<h3 id="delete-a-complete-prefix">Delete a complete prefix</h3>
+<pre><code class="language-powershell">aws s3 rm `
+    &quot;s3://wms-snapshot/inventory/us/unwanted-folder/&quot; `
+    --recursive
+</code></pre>
+<hr />
+<h2 id="full-process-summary">Full Process Summary</h2>
+<pre><code class="language-text">1. Export files are created locally.
+
+2. Files are placed in:
+   C:\Exports
+   or
+   C:\MAGENTOEXPORT\putaway
+
+3. Windows Task Scheduler starts:
+   C:\Scripts\MagentoAwsFileTransfers.bat
+
+4. The batch file starts:
+   C:\Scripts\MagentoAwsFileTransfers.ps1
+
+5. PowerShell checks:
+   - AWS CLI is installed
+   - AWS authentication works
+   - Source folders exist
+
+6. PowerShell finds new XML and CSV files.
+
+7. Files already ending with _copied_to_s3 are ignored.
+
+8. Snapshot files are copied to:
+   s3://wms-snapshot/inventory/us/magentoexport/snapshot/
+
+9. Putaway files are copied to:
+   s3://wms-snapshot/inventory/us/putaway/
+
+10. After a successful copy, the local file is renamed:
+    filename.xml
+    becomes
+    filename_copied_to_s3.xml
+
+11. Every action is added to the current monthly log.
+
+12. Local copied files older than seven days are deleted.
+
+13. The script writes totals for:
+    - Files found
+    - Files copied
+    - Failures
+    - Files renamed
+    - Old local files deleted
+
+14. Task Scheduler receives the final success or failure result.
+</code></pre>
+<p>The result is a fully automated file-transfer process with:</p>
+<pre><code class="language-text">No manual AWS login
+No manual upload
+No duplicate copying of completed files
+Monthly transfer logs
+Automatic local cleanup
+Task Scheduler monitoring
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../QRStringConfig/" class="btn btn-neutral float-left" title="QR String Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../FileImporter/" class="btn btn-neutral float-right" title="File Importer Troubleshoot">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../QRStringConfig/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../FileImporter/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
