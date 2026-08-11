@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/UPSIntegration%20notes_v1/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>UPS Integration - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "UPS Integration";
+        var mkdocs_page_input_path = "FedXIntegration\\UPSIntegration notes_v1.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/FedXIntegration/UPSIntegration%20notes_v1/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/QRStringConfig/">QR String Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/aws-s3-file-transfer/">AWS S3 File Transfer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fedex Integration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../fedexIntegration_notes_v1/">Fedex Integration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">UPS Integration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">UPS Integration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#important-for-ups">IMPORTANT FOR UPS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scripts">Scripts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#application">Application</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">UPS Integration</li>
+      <li class="breadcrumb-item active">UPS Integration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ups-rest-integration">UPS REST integration</h1>
+<h2 id="setup">Setup</h2>
+<p>This is meant to be used on a client with the packstation. Ensure the packstation is installed first if required.</p>
+<p>Start by running the necessary scripts in the client's DB.</p>
+<p>AppScripts are used to add needed views and fields for UPS </p>
+<p>SysScripts are used to configure sys params for log path and the base url we point to (UPS sandbox vs prod)</p>
+<p>DuplicateScripts are needed for both UPS and FedEx (For example the shippingAccount table and the outboundorder shipper service/account fields). If the client already has a carrier integration these may not be needed</p>
+<p>Next, add the FedExRest.cs to the App.Logic and rebuild.</p>
+<p>Finally, on the client's packstation update the create shipment buttons to call the UPS rest integration. The button logic should query the FedExShipmentInfo view based on orderID or packID and pass the resulting DataSet to FedEx.Logic.sendShipment() (this function should handle all authentication and response handling)</p>
+<p>For example, from TMUWS/App.Logic - ExecOrderPack.cs</p>
+<pre><code class="language-C#">
+case &quot;sendcarriershipment&quot;:
+    //Get carrier from header DR
+
+
+    foreach (DataRow dr in ds.Tables[0].Rows)
+    {
+        string carrier = dr[&quot;UDF_CARRIER&quot;].ToString();
+        if (carrier.ToLower() == &quot;ups&quot;)
+        {
+            Made4Net.Shared.Logging.LogFile logger = new Made4Net.Shared.Logging.LogFile(Made4Net.Shared.Util.GetSystemParameterValue(&quot;UPSLogPath&quot;), 
+                $&quot;CreateUPSShipment_{DateTime.Now.ToString(&quot;ddMMyyyy&quot;)}_{new Random().Next(1000).ToString()}&quot;);
+            DataSet UPSDS = getUPSPayloadDataOrder(dr[&quot;ORDERID&quot;].ToString(), logger);
+            pMessage = App.Logic.UPSWebService.SendUPSShipment(UPSDS, logger);
+        }
+        else if (carrier.ToLower() == &quot;fedex&quot;)
+        {
+            Made4Net.Shared.Logging.LogFile logger = new Made4Net.Shared.Logging.LogFile(Made4Net.Shared.Util.GetSystemParameterValue(&quot;FedExLogPath&quot;),
+                $&quot;CreateFedexShipment_{DateTime.Now.ToString(&quot;ddMMyyyy&quot;)}_{new Random().Next(1000).ToString()}&quot;);
+
+            DataSet FedExDS = getFedexPayloadDataOrder(dr[&quot;MASTERORDER&quot;].ToString(), logger);
+            pMessage = Fedex.Logic.FedexRest.sendShipment(FedExDS, logger);
+        }
+        else
+        {
+            throw new Exception(&quot;No carrier selected!&quot;);
+        }
+    }
+    break;
+
+</code></pre>
+<h3 id="important-for-ups">IMPORTANT FOR UPS</h3>
+<p>Also be sure to add VOID logic to the packstation - this sample is from DBBWS/AppScreens/PackOrder.aspx.vb</p>
+<pre><code class="language-C#">
+    Case &quot;voidshipment&quot;
+        Dim UPSShipmentInfoDS As DataSet = getUPSShipmentInfoFromOrderID(ds.Tables(0).Rows(0)(&quot;ORDERID&quot;))
+        Message = App.Logic.UPSWebService.sendVoidShipmentRequest(UPSShipmentInfoDS)
+End Select
+
+</code></pre>
+<h3 id="scripts">Scripts</h3>
+<p>There are 3 folders included for the UPS integration</p>
+<ol>
+<li>App</li>
+</ol>
+<p>The application scripts needed specific to UPS. These include </p>
+<p>Creating the carrier services codelist (UPS Expects to receive an ID for each service instead of the service name itself. So here we use CodeListDetail, the CODE is the internal UPS ID for each service, and the Description is the human readable. For example for UPS Ground UPS expects to receive an ID of 03 in the service field)</p>
+<p>CarrierShipment counter is needed by some older packstation versions and is included here if necessary.</p>
+<p>UPS Shipment view is used to map outbound order, contact, and other fields to send to UPS to create the shipment on their end</p>
+<ol>
+<li>Sys</li>
+</ol>
+<p>This is just to add sys_params for logging, the base URL used by UPS (Either to point to UPS test or prod), and the endpoint version to use for shipping</p>
+<ol>
+<li>Duplicate Scripts</li>
+</ol>
+<p>These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.</p>
+<p>These include the ShippingAccount table create statement, The Shipping udf fields on outboundorheader (keeps track of which carrier, service, and account# are to be used on each order)</p>
+<p>And the BillToUDFs on outboundorheader (in case the client wants to use 3rd party or receiver billing. If client is only doing BillTo sender or shipper these won't be needed)</p>
+<h3 id="application">Application</h3>
+<p>The UPS Logic is contained in one file UPSRest.cs</p>
+<p>This contains all necessary logic and functions for getting payload data, authenticating with UPS, building the createShipment request, and handling the response (either printing labels or throwing errors for the user to see)</p>
+<p>One important difference between UPS and FedEx - FedEx charges per shipment shipped. UPS Charges per shipment created. Because of this, the UPS integration also includes code to VOID a shipment (delete it from UPS for the client). Ensure any UPS testing is done against the test endpoint. This can be confirmed from the URL sys param, and from the tracking info returned from UPS in test (All valid orders in test should get a tracking number back of 1ZXXXXXXXXXX)</p>
+<p>VOID cannot be used against the test endpoint however. (This is due to the fact that shipments created in UPS Test don't generate a valid tracking number).</p>
+<p>In order to test void - switch the sys_param to point to UPS prod, create a shipment, then void the shipment soon afterwards. </p>
+<p>The void message is fairly simple however, it doesn't send any payload and just includes the tracking number to be voided in the URL</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../fedexIntegration_notes_v1/" class="btn btn-neutral float-left" title="Fedex Integration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../fedexIntegration_notes_v1/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

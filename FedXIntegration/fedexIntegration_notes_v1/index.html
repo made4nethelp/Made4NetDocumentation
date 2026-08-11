@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FileImports/FileImportfromWS/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/fedexIntegration_notes_v1/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>File Import From Workstation - Made4Net Documentation</title>
+    <title>Fedex Integration - Made4Net Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File Import From Workstation";
-        var mkdocs_page_input_path = "FileImports\\FileImportfromWS.md";
-        var mkdocs_page_url = "/Made4NetDocumentation/FileImports/FileImportfromWS/";
+        var mkdocs_page_name = "Fedex Integration";
+        var mkdocs_page_input_path = "FedXIntegration\\fedexIntegration_notes_v1.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/FedXIntegration/fedexIntegration_notes_v1/";
       </script>
     
     <!--[if lt IE 9]>
@@ -52,16 +52,10 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">File Imports</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">File Import From Workstation</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#server-disconnection">Server disconnection</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#sequence-of-execution">Sequence of execution</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Schedulers</span></p>
@@ -96,13 +90,25 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Fedex Integration</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/fedexIntegration_notes_v1/">Fedex Integration</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Fedex Integration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#scripts">Scripts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#application">Application</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">UPS Integration</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/UPSIntegration%20notes_v1/">UPS Integration</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../UPSIntegration%20notes_v1/">UPS Integration</a>
                   </li>
               </ul>
       </div>
@@ -119,8 +125,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">File Imports</li>
-      <li class="breadcrumb-item active">File Import From Workstation</li>
+          <li class="breadcrumb-item">Fedex Integration</li>
+      <li class="breadcrumb-item active">Fedex Integration</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -129,53 +135,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="csv-file-import-from-workstation-screen">CSV File import from Workstation screen</h1>
-<h2 id="server-disconnection">Server disconnection</h2>
-<p>Took GEM client as reference for documenting
-You can find all the imports from workstation changes at this m4nxfer folder</p>
-<pre><code>C:\M4NXFER\2024\ScreensImportFileButtonSetup
+                <h1 id="fedex-rest-integration">FedEx REST integration</h1>
+<h2 id="setup">Setup</h2>
+<p>This is meant to be used on a client with the packstation. Ensure the packstation is installed first if required.</p>
+<p>Start by running the necessary scripts in the client's DB.</p>
+<p>AppScripts are used to add needed views and fields for FedEx </p>
+<p>SysScripts are used to configure sys params for log path and the base url we point to (FedEx sandbox vs prod)</p>
+<p>DuplicateScripts are needed for both FedEx and UPS (For example the shippingAccount table and the outboundorder shipper service/account fields). If the client already has a carrier integration these may not be needed</p>
+<p>Next, add the FedExRest.cs to the App.Logic and rebuild.</p>
+<p>Finally, on the client's packstation update the create shipment buttons to call the FedEx rest integration. The button logic should query the FedExShipmentInfo view based on orderID or packID and pass the resulting DataSet to FedEx.Logic.sendShipment() (this function should handle all authentication and response handling)</p>
+<p>For example, from TMUWS/App.Logic - ExecOrderPack.cs</p>
+<pre><code class="language-C#">
+case &quot;sendcarriershipment&quot;:
+    //Get carrier from header DR
+
+
+    foreach (DataRow dr in ds.Tables[0].Rows)
+    {
+        string carrier = dr[&quot;UDF_CARRIER&quot;].ToString();
+        if (carrier.ToLower() == &quot;ups&quot;)
+        {
+            Made4Net.Shared.Logging.LogFile logger = new Made4Net.Shared.Logging.LogFile(Made4Net.Shared.Util.GetSystemParameterValue(&quot;UPSLogPath&quot;), 
+                $&quot;CreateUPSShipment_{DateTime.Now.ToString(&quot;ddMMyyyy&quot;)}_{new Random().Next(1000).ToString()}&quot;);
+            DataSet UPSDS = getUPSPayloadDataOrder(dr[&quot;ORDERID&quot;].ToString(), logger);
+            pMessage = App.Logic.UPSWebService.SendUPSShipment(UPSDS, logger);
+        }
+        else if (carrier.ToLower() == &quot;fedex&quot;)
+        {
+            Made4Net.Shared.Logging.LogFile logger = new Made4Net.Shared.Logging.LogFile(Made4Net.Shared.Util.GetSystemParameterValue(&quot;FedExLogPath&quot;),
+                $&quot;CreateFedexShipment_{DateTime.Now.ToString(&quot;ddMMyyyy&quot;)}_{new Random().Next(1000).ToString()}&quot;);
+
+            DataSet FedExDS = getFedexPayloadDataOrder(dr[&quot;MASTERORDER&quot;].ToString(), logger);
+            pMessage = Fedex.Logic.FedexRest.sendShipment(FedExDS, logger);
+        }
+        else
+        {
+            throw new Exception(&quot;No carrier selected!&quot;);
+        }
+    }
+    break;
+
 </code></pre>
-<p>To add an import button on workstation screen use util function AddImportButton()
-Call this function where needed</p>
-<pre><code>Utils.AddImportButton(TEMasterInboundOrders, WMS.Lib.BOTypes.C_INBOUND)
-</code></pre>
-<p>Also add the following nodes to  SKinConfig.xml for import icons</p>
-<pre><code>        &lt;Image Name=&quot;ActionBarSAASImport&quot; Src=&quot;ActionBar/ActionBarSAASImport.png&quot; /&gt;
-        &lt;Image Name=&quot;ActionBarSAASExport&quot; Src=&quot;ActionBar/ActionBarSAASExport.png&quot; /&gt;
-</code></pre>
-<p>Custom DTs are prepared for the import screens</p>
-<p><strong>Timeout error on Postman</strong><br />
-<img alt="Timeout Error" src="img/timeouterror.png" /></p>
-<h2 id="sequence-of-execution">Sequence of execution</h2>
-<p>on calling AddImportButton() method, it opens a pop up screen</p>
-<p>AddImportButton() logic dynamically adds an import button to the tableEditor
-It brings the import icon image from skin configuration,  and injects javascript into the page.
-This JS opens a telerik RadWindow popup pointing to the DT which we send to importer.aspx :</p>
-<pre><code>../m4nScreens/importer.aspx?ImprtObj={BOname}
-</code></pre>
-<p>In the page load of importer </p>
-<p>after selecting csv file, on clicking import button it calls importer.aspx sending BOname as query params.
-In the page load of Importer, we capture the BOname from the query params and use it setting DefaultDt on the telerik popup page</p>
-<p>Code to Capture Query param and set it to default DT</p>
-<p>````
-  Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-      Session("ImprtObj") = Request.QueryString("ImprtObj").ToLower()
-      divSummery.Visible = False
-      If Not IsPostBack Then
-      //Here defaultDT is assigned from query params
-          TEImporter.DefaultDT = String.Format("DTvObjectsImport{0}", Request.QueryString("ImprtObj"))
-          TEImporter.Restart()
-          divSummery.Visible = False
-      End If
-  End Sub</p>
-<p>```</p>
-<hr />
+<h2 id="how-to-use">How to use</h2>
+<h3 id="scripts">Scripts</h3>
+<p>There are 3 folders included for the FedEx integration</p>
+<ol>
+<li>App</li>
+</ol>
+<p>The application scripts needed specific to FedEx. These include </p>
+<p>BillToFields used for 3rd party billing</p>
+<p>FedEx services codelist (Defines the various service methods that we can send to FedEx. Maps a human readable name to the value FedEx expects)</p>
+<p>vFedexShipmentInfo - a new view that maps outbound order, contact, consignee, and any other fields to the expected field names for the integration. Any customizations or new mappings should be made to this view</p>
+<ol>
+<li>Sys</li>
+</ol>
+<p>This is just to add sys_params for logging, and the base URL used by FedEx (Either to point to FedEx test or prod)</p>
+<ol>
+<li>Duplicate Scripts</li>
+</ol>
+<p>These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.</p>
+<p>These include the ShippingAccount table create statement, The Shipping udf fields on outboundorheader (keeps track of which carrier, service, and account# are to be used on each order)</p>
+<p>And the BillToUDFs on outboundorheader (in case the client wants to use 3rd party or receiver billing. If client is only doing BillTo sender or shipper these won't be needed)</p>
+<h3 id="application">Application</h3>
+<p>The FedExRest Logic is contained in one file FedExRest.cs</p>
+<p>This contains all necessary logic and functions for getting payload data, authenticating with FedEx, building the createShipment request, and handling the response (either printing labels or throwing errors for the user to see)</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../FileImporter/" class="btn btn-neutral float-left" title="File Importer Troubleshoot"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../schedulers/view-to-table-scheduler/" class="btn btn-neutral float-right" title="ViewToTable Scheduler">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../LoadImporter/LoadImporter/" class="btn btn-neutral float-left" title="Create Load Importer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../UPSIntegration%20notes_v1/" class="btn btn-neutral float-right" title="UPS Integration">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -198,10 +227,10 @@ In the page load of Importer, we capture the BOname from the query params and us
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../FileImporter/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../LoadImporter/LoadImporter/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../schedulers/view-to-table-scheduler/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../UPSIntegration%20notes_v1/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
