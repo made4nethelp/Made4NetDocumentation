@@ -22,7 +22,11 @@ nav:
       - Nuget Reference Error: troubleshooting/nuget-reference.md  
   - Create Load Importer:
       - Create Load Importer: LoadImporter/LoadImporter.md
-
+  - Fedex Integration:
+      - Fedex Integration: FedXIntegration/fedexIntegration_notes_v1.md
+  - UPS Integration:
+      - UPS Integration: FedXIntegration/UPSIntegration notes_v1.md
+    
 theme: 
     name: readthedocs
     primary : red
