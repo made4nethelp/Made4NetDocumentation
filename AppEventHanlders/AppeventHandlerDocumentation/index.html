@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/AppEventHanlders/AppeventHandlerDocumentation/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>App Event Handler Process - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "App Event Handler Process";
+        var mkdocs_page_input_path = "AppEventHanlders\\AppeventHandlerDocumentation.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/AppEventHanlders/AppeventHandlerDocumentation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/QRStringConfig/">QR String Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/aws-s3-file-transfer/">AWS S3 File Transfer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">File Imports</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Schedulers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Fedex Integration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/fedexIntegration_notes_v1/">Fedex Integration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">UPS Integration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/UPSIntegration%20notes_v1/">UPS Integration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">App Event Handlers</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">App Event Handler Process</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#step-1-create-the-project">Step 1 - Create the project</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-2-add-the-handler">Step 2 - Add the handler</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-3-add-projectinstaller">Step 3 - Add ProjectInstaller</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-4-add-appconfig">Step 4 - Add App.config</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-5-build-and-copy-the-files">Step 5 - Build and copy the files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-6-install-the-service">Step 6 - Install the service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-7-start-and-verify-the-service">Step 7 - Start and verify the service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-8-test-it">Step 8 - Test it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-troubleshooting">Quick troubleshooting</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">App Event Handlers</li>
+      <li class="breadcrumb-item active">App Event Handler Process</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="creating-and-installing-a-made4net-appeventhandler">Creating and Installing a Made4net AppEventHandler</h1>
+<p><em>Simple step-by-step guide</em></p>
+<p>This is the basic process we followed for the BES AppEventHandler. The service listens to the AppEventHandler MSMQ queue, receives Made4net events, and runs our custom code based on the event number.</p>
+<h2 id="step-1-create-the-project">Step 1 - Create the project</h2>
+<ol>
+<li>In Visual Studio, create a C# Windows Service (.NET Framework) project.</li>
+<li>Select .NET Framework 4.8.</li>
+<li>Add references to the required Made4net DLLs and to <code>System.Configuration</code>, <code>System.Messaging</code>, <code>System.ServiceProcess</code>, and <code>System.Configuration.Install</code>.</li>
+</ol>
+<h2 id="step-2-add-the-handler">Step 2 - Add the handler</h2>
+<p>Create a <code>Handler</code> class that inherits from <code>Made4Net.Shared.QHandler</code>. <code>AppEventHandler</code> is the queue name.</p>
+<pre><code class="language-csharp">public partial class Handler : Made4Net.Shared.QHandler
+{
+    public Handler() : base(&quot;AppEventHandler&quot;, false)
+    {
+        LoggingEnabled = Convert.ToInt32(
+            ConfigurationManager.AppSettings[&quot;UseLogs&quot;]);
+        LogDirectory = ConfigurationManager.AppSettings[&quot;LogPath&quot;];
+    }
+
+    protected override void ProcessQueue(Message qMsg, QMsgSender qSender,
+        PeekCompletedEventArgs e)
+    {
+        int eventId;
+        if (!Int32.TryParse(Convert.ToString(qSender.Values[&quot;EVENT&quot;]), out eventId))
+            return;
+
+        switch (eventId)
+        {
+            case 41: // CREATELOAD
+                // Add the custom logic here.
+                break;
+        }
+    }
+}
+</code></pre>
+<p>Inside <code>ProcessQueue</code>, read the message values we need, validate them, and then run the logic for that event. Log the full exception if something fails so the service does not fail silently.</p>
+<h2 id="step-3-add-projectinstaller">Step 3 - Add ProjectInstaller</h2>
+<p>This step is required. Without <code>ProjectInstaller</code>, <code>InstallUtil</code> may finish without actually creating a Windows service.</p>
+<pre><code class="language-csharp">[RunInstaller(true)]
+public partial class ProjectInstaller : Installer
+{
+    public ProjectInstaller()
+    {
+        InitializeComponent();
+    }
+}
+</code></pre>
+<p>In <code>ProjectInstaller.Designer.cs</code>, configure the service like this:</p>
+<pre><code class="language-csharp">serviceProcessInstaller1.Account = ServiceAccount.LocalSystem;
+serviceInstaller1.ServiceName = &quot;ExpertAppEventHandler&quot;;
+serviceInstaller1.DisplayName = &quot;Expert App Event Handler&quot;;
+serviceInstaller1.Description = &quot;Processes Made4net application events.&quot;;
+serviceInstaller1.StartType = ServiceStartMode.Automatic;
+
+Installers.AddRange(new Installer[] {
+    serviceProcessInstaller1, serviceInstaller1
+});
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Make sure <code>serviceInstaller1</code> and <code>serviceProcessInstaller1</code> are declared as fields in the partial <code>ProjectInstaller</code> class. If they are missing, Visual Studio shows <code>CS1061</code> errors.</p>
+</blockquote>
+<h2 id="step-4-add-appconfig">Step 4 - Add App.config</h2>
+<p>The config file controls logging. After building, it must be beside the EXE as <code>BESAppEventHandler.exe.config</code>.</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;configuration&gt;
+  &lt;appSettings&gt;
+    &lt;add key=&quot;UseLogs&quot; value=&quot;1&quot; /&gt;
+    &lt;add key=&quot;LogPath&quot; value=&quot;C:\Program Files (x86)\Made4Net\SCExpert\Logs\AppEventHandler&quot; /&gt;
+  &lt;/appSettings&gt;
+  &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt;
+    &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.8&quot; /&gt;
+  &lt;/startup&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h2 id="step-5-build-and-copy-the-files">Step 5 - Build and copy the files</h2>
+<ol>
+<li>Build the project in Release mode.</li>
+<li>Copy <code>AppEventHandler.exe</code>, <code>AppEventHandler.exe.config</code>, and any required custom DLLs to the server.</li>
+<li>On the server, place them in the following folder:</li>
+</ol>
+<p><code>text
+   C:\Program Files (x86)\Made4Net\SCExpert\Services</code></p>
+<ol>
+<li>Make sure the service account has permission to write to the configured log folder.</li>
+</ol>
+<h2 id="step-6-install-the-service">Step 6 - Install the service</h2>
+<p>Open Command Prompt as Administrator and run:</p>
+<pre><code class="language-bat">C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe &quot;C:\Program Files (x86)\Made4Net\SCExpert\Services\BESAppEventHandler.exe&quot;
+</code></pre>
+<p>The output should contain these lines:</p>
+<pre><code class="language-text">Installing service ExpertAppEventHandler...
+Service ExpertAppEventHandler has been successfully installed.
+</code></pre>
+<h2 id="step-7-start-and-verify-the-service">Step 7 - Start and verify the service</h2>
+<pre><code class="language-bat">sc query ExpertAppEventHandler
+sc qc ExpertAppEventHandler
+net start ExpertAppEventHandler
+</code></pre>
+<p>Use <code>ExpertAppEventHandler</code> because that is the <code>ServiceName</code> configured in <code>ProjectInstaller</code>. After starting it, the service should show <code>RUNNING</code> in Services or in the <code>sc query</code> output.</p>
+<h2 id="step-8-test-it">Step 8 - Test it</h2>
+<ol>
+<li>Trigger one controlled Made4net event. For BES, we used event 41 by creating a test load.</li>
+<li>Open the AppEventHandler log and confirm that the event and message values were received.</li>
+<li>Check that the database update or export happened once.</li>
+<li>If the message keeps retrying, check the exception in the handler log and the Windows Event Viewer.</li>
+</ol>
+<h2 id="quick-troubleshooting">Quick troubleshooting</h2>
+<ul>
+<li><strong>Service does not exist:</strong> <code>ProjectInstaller</code> was probably missing or <code>InstallUtil</code> did not find it.</li>
+<li><strong>Service name is invalid:</strong> use <code>ExpertAppEventHandler</code>, not <code>BESAppEventHandler</code>.</li>
+<li><strong>Service starts and stops:</strong> check Event Viewer, the <code>.config</code> file, missing DLLs, and queue configuration.</li>
+<li><strong>MSMQ format name is invalid:</strong> verify the private queue name and Made4net queue configuration.</li>
+<li><strong>Access denied:</strong> give the service account permission to the log or export folder.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../FedXIntegration/UPSIntegration%20notes_v1/" class="btn btn-neutral float-left" title="UPS Integration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../FedXIntegration/UPSIntegration%20notes_v1/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

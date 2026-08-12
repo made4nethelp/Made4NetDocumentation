@@ -2,78 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/FileImporter/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
+    </url>
+    <url>
+         <loc>https://made4nethelp.github.io/Made4NetDocumentation/AppEventHanlders/AppeventHandlerDocumentation/</loc>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dt-use-dt-connection/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/dtExpressions/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/DataTables/sku_onpropertychange_po/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/UPSIntegration%20notes_v1/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/fedexIntegration_notes_v1/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/FileImports/FileImportfromWS/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/LoadImporter/LoadImporter/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/ReleaseNotes/4.12.1.x/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/FileImportfromWS/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/QRStringConfig/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/aws-s3-file-transfer/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/certificateInstallationSteps/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/server-disconnection-max-pool/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/configuration/timeouterror/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/schedulers/force-user-logout/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/schedulers/view-to-table-scheduler/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
     <url>
          <loc>https://made4nethelp.github.io/Made4NetDocumentation/troubleshooting/nuget-reference/</loc>
-         <lastmod>2026-08-11</lastmod>
+         <lastmod>2026-08-12</lastmod>
     </url>
 </urlset>
