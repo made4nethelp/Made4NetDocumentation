@@ -26,6 +26,8 @@ nav:
       - Fedex Integration: FedXIntegration/fedexIntegration_notes_v1.md
   - UPS Integration:
       - UPS Integration: FedXIntegration/UPSIntegration notes_v1.md
+  - App Event Handlers:
+      - App Event Handler Process: AppEventHanlders/AppeventHandlerDocumentation.md
     
 theme: 
     name: readthedocs
