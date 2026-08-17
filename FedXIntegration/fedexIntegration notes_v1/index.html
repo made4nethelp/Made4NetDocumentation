@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/fedexIntegration_notes_v1/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/FedXIntegration/fedexIntegration%20notes_v1/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Fedex Integration - Made4Net Documentation</title>
+    <title>FedEx REST integration - Made4Net Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Fedex Integration";
-        var mkdocs_page_input_path = "FedXIntegration\\fedexIntegration_notes_v1.md";
-        var mkdocs_page_url = "/Made4NetDocumentation/FedXIntegration/fedexIntegration_notes_v1/";
+        var mkdocs_page_name = "FedEx REST integration";
+        var mkdocs_page_input_path = "FedXIntegration\\fedexIntegration notes_v1.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/FedXIntegration/fedexIntegration%20notes_v1/";
       </script>
     
     <!--[if lt IE 9]>
@@ -50,19 +50,21 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../configuration/aws-s3-file-transfer/">AWS S3 File Transfer</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">File Imports</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/integration-services/">Integration Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../fedexIntegration_notes_v1.md">Fedex Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../UPSIntegration%20notes_v1/">UPS Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Load Importer</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Schedulers</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout on Scheduler</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Data Editors</span></p>
@@ -83,37 +85,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Fedex Integration</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Fedex Integration</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#scripts">Scripts</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#application">Application</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">UPS Integration</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../UPSIntegration%20notes_v1/">UPS Integration</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">App Event Handlers</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
                   </li>
               </ul>
       </div>
@@ -130,8 +102,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Fedex Integration</li>
-      <li class="breadcrumb-item active">Fedex Integration</li>
+      <li class="breadcrumb-item active">FedEx REST integration</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -184,20 +155,14 @@ case &quot;sendcarriershipment&quot;:
 <h2 id="how-to-use">How to use</h2>
 <h3 id="scripts">Scripts</h3>
 <p>There are 3 folders included for the FedEx integration</p>
-<ol>
-<li>App</li>
-</ol>
+<p>&nbsp; 1. App</p>
 <p>The application scripts needed specific to FedEx. These include </p>
 <p>BillToFields used for 3rd party billing</p>
 <p>FedEx services codelist (Defines the various service methods that we can send to FedEx. Maps a human readable name to the value FedEx expects)</p>
 <p>vFedexShipmentInfo - a new view that maps outbound order, contact, consignee, and any other fields to the expected field names for the integration. Any customizations or new mappings should be made to this view</p>
-<ol>
-<li>Sys</li>
-</ol>
+<p>&nbsp; 2. Sys</p>
 <p>This is just to add sys_params for logging, and the base URL used by FedEx (Either to point to FedEx test or prod)</p>
-<ol>
-<li>Duplicate Scripts</li>
-</ol>
+<p>&nbsp; 3. Duplicate Scripts</p>
 <p>These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.</p>
 <p>These include the ShippingAccount table create statement, The Shipping udf fields on outboundorheader (keeps track of which carrier, service, and account# are to be used on each order)</p>
 <p>And the BillToUDFs on outboundorheader (in case the client wants to use 3rd party or receiver billing. If client is only doing BillTo sender or shipper these won't be needed)</p>
@@ -207,10 +172,6 @@ case &quot;sendcarriershipment&quot;:
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../LoadImporter/LoadImporter/" class="btn btn-neutral float-left" title="Create Load Importer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../UPSIntegration%20notes_v1/" class="btn btn-neutral float-right" title="UPS Integration">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -232,10 +193,6 @@ case &quot;sendcarriershipment&quot;:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../LoadImporter/LoadImporter/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../UPSIntegration%20notes_v1/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

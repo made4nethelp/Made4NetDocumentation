@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/configuration/integration-services/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Integration Services - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Integration Services";
+        var mkdocs_page_input_path = "configuration\\integration-services.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/configuration/integration-services/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../QRStringConfig/">QR String Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../aws-s3-file-transfer/">AWS S3 File Transfer</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Integration Services</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#overall-flow">Overall Flow</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-source-code">1. Source Code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-find-the-integration-services-database">2. Find the Integration Services Database</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-plugin-routing-configuration">3. Plugin Routing Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#how-botype-routing-works">How BOType Routing Works</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-authentication-configuration">4. Authentication Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-get-authtoken-using-postman">5. Get AuthToken Using Postman</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-test-the-import-api">6. Test the Import API</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complete-integration-services-flow">Complete Integration Services Flow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-troubleshooting">Quick Troubleshooting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-flow">Quick Flow</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../FedXIntegration/fedexIntegration_notes_v1.md">Fedex Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/UPSIntegration%20notes_v1/">UPS Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Load Importer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout on Scheduler</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Integration Services</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="integration-services">Integration Services</h1>
+<h2 id="overview">Overview</h2>
+<p>Integration Services acts as the entry point for REST API requests and
+routes them to the appropriate SCExpert Connect plugin.</p>
+<h3 id="overall-flow">Overall Flow</h3>
+<pre><code class="language-text">Client / Postman
+      |
+      v
+Integration Services API
+      |
+      | Warehouse + BOType
+      v
+IntegrationServicesPluginRegistry
+      |
+      | IP + Port + URLPath
+      v
+Matching SCExpert Connect Plugin
+      |
+      v
+WMS / Client Database
+</code></pre>
+<hr />
+<h2 id="1-source-code">1. Source Code</h2>
+<p>For <strong>SCExpert 4.12.1</strong>, the Integration Services code is available in
+Azure DevOps under:</p>
+<pre><code class="language-text">Repository:
+SCExpert_WMSRestAPI_4.12.1
+</code></pre>
+<p><img alt="Integration Services
+Repository" src="images/integration-services/01-repository.png" /></p>
+<p>The repository contains:</p>
+<pre><code class="language-text">SAAS.ConnectPlugins.sln
+SAAS.IntegrationServices.sln
+SAAS.Logic.sln
+</code></pre>
+<p>For Integration Services, open:</p>
+<pre><code class="language-text">SAAS.IntegrationServices.sln
+</code></pre>
+<p><img alt="Integration Services
+Solution" src="images/integration-services/02-solution.png" /></p>
+<p>The main project is:</p>
+<pre><code class="language-text">SAAS.IntegrationServices
+</code></pre>
+<p><img alt="Integration Services
+Project" src="images/integration-services/03-project-structure.png" /></p>
+<p>Two important controllers are:</p>
+<ul>
+<li><code>AuthenticateController.cs</code> -- handles API authentication.</li>
+<li><code>SAASInterfacesController.cs</code> -- handles Import API requests.</li>
+</ul>
+<p>The main Import route is:</p>
+<pre><code class="language-text">POST /IntegrationServices/api/Import/{boType}
+</code></pre>
+<hr />
+<h2 id="2-find-the-integration-services-database">2. Find the Integration Services Database</h2>
+<p>On the client/Azure server, open:</p>
+<pre><code class="language-text">Made4Net.ConnRegistration
+</code></pre>
+<p><img alt="ConnRegistration" src="images/integration-services/04-connregistration.png" /></p>
+<p>In <strong>Connection Manager</strong>, the <code>Default</code> connection is normally used by
+the workstation/RDT.</p>
+<p>Change <strong>App Name</strong> to:</p>
+<pre><code class="language-text">IntegrationServices
+</code></pre>
+<p><img alt="Integration Services
+Connection" src="images/integration-services/06-integration-services-connection.png" /></p>
+<p>This shows which database Integration Services is using.</p>
+<p>In this example:</p>
+<pre><code class="language-text">SCEWEBINTERFACESYS
+</code></pre>
+<hr />
+<h2 id="3-plugin-routing-configuration">3. Plugin Routing Configuration</h2>
+<p>In the Integration Services database, run:</p>
+<pre><code class="language-sql">SELECT *
+FROM IntegrationServicesPluginRegistry;
+</code></pre>
+<p><img alt="Integration Services Plugin
+Registry" src="images/integration-services/07-plugin-registry.png" /></p>
+<p>This table tells Integration Services where each request needs to be
+routed.</p>
+<p>Field         Purpose</p>
+<hr />
+<p><code>Warehouse</code>   Warehouse
+  <code>BOType</code>      Business Object/API type
+  <code>IP</code>          Plugin server IP
+  <code>Port</code>        Plugin port
+  <code>URLPath</code>     Plugin endpoint
+  <code>DBName</code>      Client database</p>
+<p>The actual REST API plugins can be checked using:</p>
+<pre><code class="language-sql">SELECT *
+FROM SCEXPERTCONNECTPLUGINS;
+</code></pre>
+<p><img alt="SCExpert Connect
+Plugins" src="images/integration-services/08-connect-plugins.png" /></p>
+<p>Examples include:</p>
+<pre><code class="language-text">HTTPListener COMPANY API
+HTTPListener INBOUND API
+HTTPListener OUTBOUND API
+HTTPListener RECEIPT API
+HTTPListener SKU API
+</code></pre>
+<h3 id="how-botype-routing-works">How BOType Routing Works</h3>
+<p>For example:</p>
+<pre><code class="language-text">POST http://10.7.2.108/IntegrationServices/api/Import/OUTBOUND
+</code></pre>
+<p>The last value, <code>OUTBOUND</code>, is the <strong>BOType</strong> and must match the BOType
+configured in <code>IntegrationServicesPluginRegistry</code>.</p>
+<p>Integration Services then uses the configured <strong>IP, Port and URLPath</strong>
+to route the request to the corresponding plugin.</p>
+<pre><code class="language-text">/api/Import/OUTBOUND
+        |
+        v
+BOType = OUTBOUND
+        |
+        v
+IntegrationServicesPluginRegistry
+        |
+        | Find matching Warehouse + BOType
+        v
+IP + Port + URLPath
+        |
+        v
+SCEXPERTCONNECTPLUGINS
+        |
+        v
+HTTPListener OUTBOUND API
+</code></pre>
+<p><img alt="Postman Import
+URL" src="images/integration-services/09-postman-import-url.png" /></p>
+<hr />
+<h2 id="4-authentication-configuration">4. Authentication Configuration</h2>
+<p>Before testing an API, obtain an authentication token.</p>
+<p>The Integration Services username and password are stored in the
+<code>SYS_PARAM</code> table of the Integration Services database.</p>
+<pre><code class="language-sql">SELECT *
+FROM SYS_PARAM
+WHERE PARAM_NAME LIKE '%SAAS%';
+</code></pre>
+<p><img alt="Authentication
+Parameters" src="images/integration-services/10-sys-param-authentication.png" /></p>
+<p>Important parameters:</p>
+<ul>
+<li><code>SAASAPIUserName</code> -- Login API username</li>
+<li><code>SAASAPIPassword</code> -- Login API password</li>
+<li><code>SAASApiAuthTokenExp</code> -- Token expiry configuration</li>
+</ul>
+<p>!!! warning "Security" Do not store actual passwords or AuthTokens in
+documentation or shared screenshots.</p>
+<hr />
+<h2 id="5-get-authtoken-using-postman">5. Get AuthToken Using Postman</h2>
+<p>First call the Login API:</p>
+<pre><code class="language-text">POST http://&lt;Integration-Services-IP&gt;/IntegrationServices/api/login
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-text">POST http://10.7.2.108/IntegrationServices/api/login
+</code></pre>
+<p>In <strong>Authorization</strong>, select <strong>Basic Auth</strong> and use the username and
+password configured in <code>SYS_PARAM</code>.</p>
+<p><img alt="Login Basic
+Authentication" src="images/integration-services/11-login-basic-auth.png" /></p>
+<p>Send the request.</p>
+<p>A successful request returns:</p>
+<pre><code class="language-text">200 OK
+&quot;Authorized&quot;
+</code></pre>
+<p><img alt="Login Authorized" src="images/integration-services/12-login-authorized.png" /></p>
+<p>Open the response <strong>Headers</strong> and copy the <code>AuthToken</code>.</p>
+<p><img alt="AuthToken Header" src="images/integration-services/13-login-auth-token.png" /></p>
+<hr />
+<h2 id="6-test-the-import-api">6. Test the Import API</h2>
+<p>Open the API that needs to be tested.</p>
+<p>Example:</p>
+<pre><code class="language-text">POST http://10.7.2.108/IntegrationServices/api/Import/OUTBOUND
+</code></pre>
+<p>Go to <strong>Authorization → API Key</strong> and configure:</p>
+<pre><code class="language-text">Key   = AuthToken
+Value = &lt;token copied from Login API&gt;
+</code></pre>
+<p><img alt="Import API
+Authorization" src="images/integration-services/14-import-api-auth-token.png" /></p>
+<p>Add the required request body and send the request.</p>
+<hr />
+<h2 id="complete-integration-services-flow">Complete Integration Services Flow</h2>
+<pre><code class="language-text">              SCEWEBINTERFACESYS
+                     |
+          +----------+-----------+
+          |                      |
+          v                      v
+       SYS_PARAM      IntegrationServicesPluginRegistry
+          |                      |
+ Username + Password       BOType / IP / Port
+          |                URLPath / DBName
+          v                      |
+      Login API                  |
+          |                      |
+          v                      |
+      AuthToken                  |
+          |                      |
+          +----------+-----------+
+                     |
+                     v
+              Import API Request
+                     |
+       /api/Import/{BOType}
+                     |
+                     v
+          SAASInterfacesController
+                     |
+                     v
+           Match Warehouse + BOType
+                     |
+                     v
+       IntegrationServicesPluginRegistry
+                     |
+                     v
+            IP + Port + URLPath
+                     |
+                     v
+          SCEXPERTCONNECTPLUGINS
+                     |
+                     v
+          Matching REST API Plugin
+                     |
+                     v
+               WMS Processing
+</code></pre>
+<hr />
+<h2 id="quick-troubleshooting">Quick Troubleshooting</h2>
+<p>If an Integration Services API is not working, check in this order:</p>
+<ol>
+<li><strong>ConnRegistration</strong> -- Verify the <code>IntegrationServices</code> connection
+    points to the correct database.</li>
+<li><strong>SYS_PARAM</strong> -- Verify the API username/password configuration.</li>
+<li><strong>Login API</strong> -- Confirm it returns <code>200 OK</code> and an <code>AuthToken</code>.</li>
+<li><strong>Import URL</strong> -- Verify <code>/api/Import/{BOType}</code> is correct.</li>
+<li><strong>IntegrationServicesPluginRegistry</strong> -- Verify Warehouse, BOType,
+    IP, Port, URLPath and DBName.</li>
+<li><strong>SCEXPERTCONNECTPLUGINS</strong> -- Verify the corresponding plugin and
+    BOType exist.</li>
+<li><strong>IP/Port</strong> -- Verify the target REST API plugin is running on the
+    configured IP and port.</li>
+</ol>
+<h3 id="quick-flow">Quick Flow</h3>
+<pre><code class="language-text">Login Failed?
+    -&gt; Check SYS_PARAM
+
+Login Works but Import Fails?
+    -&gt; Check AuthToken
+
+Request Not Reaching Plugin?
+    -&gt; Check BOType
+    -&gt; Check IntegrationServicesPluginRegistry
+
+BOType Correct?
+    -&gt; Check SCEXPERTCONNECTPLUGINS
+    -&gt; Check IP / Port / URLPath
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../aws-s3-file-transfer/" class="btn btn-neutral float-left" title="AWS S3 File Transfer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../FedXIntegration/UPSIntegration%20notes_v1/" class="btn btn-neutral float-right" title="UPS Integration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../aws-s3-file-transfer/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../FedXIntegration/UPSIntegration%20notes_v1/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

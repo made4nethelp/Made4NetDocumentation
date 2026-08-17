@@ -41,7 +41,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Configuration</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../configuration/certificateInstallationSteps/">IIS HTTPS Configuration</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../configuration/server-disconnection-max-pool/">Timeout Error</a>
@@ -50,19 +50,33 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../configuration/aws-s3-file-transfer/">AWS S3 File Transfer</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">File Imports</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/integration-services/">Integration Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../fedexIntegration_notes_v1.md">Fedex Integration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">UPS Integration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#important-for-ups">IMPORTANT FOR UPS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scripts">Scripts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#application">Application</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Load Importer</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Schedulers</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout on Scheduler</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Data Editors</span></p>
@@ -83,37 +97,7 @@
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Create Load Importer</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Create Load Importer</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Fedex Integration</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../fedexIntegration_notes_v1/">Fedex Integration</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">UPS Integration</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">UPS Integration</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#important-for-ups">IMPORTANT FOR UPS</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#scripts">Scripts</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#application">Application</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">App Event Handlers</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
                   </li>
               </ul>
       </div>
@@ -130,7 +114,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">UPS Integration</li>
+          <li class="breadcrumb-item">Configuration</li>
       <li class="breadcrumb-item active">UPS Integration</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -192,20 +176,14 @@ End Select
 </code></pre>
 <h3 id="scripts">Scripts</h3>
 <p>There are 3 folders included for the UPS integration</p>
-<ol>
-<li>App</li>
-</ol>
+<p>&nbsp; 1. App</p>
 <p>The application scripts needed specific to UPS. These include </p>
 <p>Creating the carrier services codelist (UPS Expects to receive an ID for each service instead of the service name itself. So here we use CodeListDetail, the CODE is the internal UPS ID for each service, and the Description is the human readable. For example for UPS Ground UPS expects to receive an ID of 03 in the service field)</p>
 <p>CarrierShipment counter is needed by some older packstation versions and is included here if necessary.</p>
 <p>UPS Shipment view is used to map outbound order, contact, and other fields to send to UPS to create the shipment on their end</p>
-<ol>
-<li>Sys</li>
-</ol>
+<p>&nbsp; 2. Sys</p>
 <p>This is just to add sys_params for logging, the base URL used by UPS (Either to point to UPS test or prod), and the endpoint version to use for shipping</p>
-<ol>
-<li>Duplicate Scripts</li>
-</ol>
+<p>&nbsp; 3. Duplicate Scripts</p>
 <p>These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.</p>
 <p>These include the ShippingAccount table create statement, The Shipping udf fields on outboundorheader (keeps track of which carrier, service, and account# are to be used on each order)</p>
 <p>And the BillToUDFs on outboundorheader (in case the client wants to use 3rd party or receiver billing. If client is only doing BillTo sender or shipper these won't be needed)</p>
@@ -220,7 +198,7 @@ End Select
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../fedexIntegration_notes_v1/" class="btn btn-neutral float-left" title="Fedex Integration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../configuration/integration-services/" class="btn btn-neutral float-left" title="Integration Services"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../../AppEventHanlders/AppeventHandlerDocumentation/" class="btn btn-neutral float-right" title="App Event Handler Process">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -244,7 +222,7 @@ End Select
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../fedexIntegration_notes_v1/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../configuration/integration-services/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../../AppEventHanlders/AppeventHandlerDocumentation/" style="color: #fcfcfc">Next &raquo;</a></span>
