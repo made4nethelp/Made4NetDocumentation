@@ -69,7 +69,7 @@ End Select
 ### Scripts
 There are 3 folders included for the UPS integration
 
-1. App
+&nbsp; 1\. App
 
 The application scripts needed specific to UPS. These include 
 
@@ -79,11 +79,11 @@ CarrierShipment counter is needed by some older packstation versions and is incl
 
 UPS Shipment view is used to map outbound order, contact, and other fields to send to UPS to create the shipment on their end
 
-2. Sys
+&nbsp; 2\. Sys
 
 This is just to add sys_params for logging, the base URL used by UPS (Either to point to UPS test or prod), and the endpoint version to use for shipping
 
-3. Duplicate Scripts
+&nbsp; 3\. Duplicate Scripts
 
 These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.
 

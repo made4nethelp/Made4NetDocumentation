@@ -2,7 +2,7 @@
 
 *Simple step-by-step guide*
 
-This is the basic process we followed for the BES AppEventHandler. The service listens to the AppEventHandler MSMQ queue, receives Made4net events, and runs our custom code based on the event number.
+This is the basic process we followed for the BES AppEventHandler. The service listens to the `AppEventHandler` MSMQ queue, receives Made4net events, and runs our custom code based on the event number.
 
 ## Step 1 - Create the project
 
@@ -21,15 +21,23 @@ public partial class Handler : Made4Net.Shared.QHandler
     {
         LoggingEnabled = Convert.ToInt32(
             ConfigurationManager.AppSettings["UseLogs"]);
+
         LogDirectory = ConfigurationManager.AppSettings["LogPath"];
     }
 
-    protected override void ProcessQueue(Message qMsg, QMsgSender qSender,
+    protected override void ProcessQueue(
+        Message qMsg,
+        QMsgSender qSender,
         PeekCompletedEventArgs e)
     {
         int eventId;
-        if (!Int32.TryParse(Convert.ToString(qSender.Values["EVENT"]), out eventId))
+
+        if (!Int32.TryParse(
+            Convert.ToString(qSender.Values["EVENT"]),
+            out eventId))
+        {
             return;
+        }
 
         switch (eventId)
         {
@@ -62,13 +70,16 @@ In `ProjectInstaller.Designer.cs`, configure the service like this:
 
 ```csharp
 serviceProcessInstaller1.Account = ServiceAccount.LocalSystem;
+
 serviceInstaller1.ServiceName = "ExpertAppEventHandler";
 serviceInstaller1.DisplayName = "Expert App Event Handler";
 serviceInstaller1.Description = "Processes Made4net application events.";
 serviceInstaller1.StartType = ServiceStartMode.Automatic;
 
-Installers.AddRange(new Installer[] {
-    serviceProcessInstaller1, serviceInstaller1
+Installers.AddRange(new Installer[]
+{
+    serviceProcessInstaller1,
+    serviceInstaller1
 });
 ```
 
@@ -85,6 +96,7 @@ The config file controls logging. After building, it must be beside the EXE as `
     <add key="UseLogs" value="1" />
     <add key="LogPath" value="C:\Program Files (x86)\Made4Net\SCExpert\Logs\AppEventHandler" />
   </appSettings>
+
   <startup useLegacyV2RuntimeActivationPolicy="true">
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
   </startup>
@@ -94,12 +106,12 @@ The config file controls logging. After building, it must be beside the EXE as `
 ## Step 5 - Build and copy the files
 
 1. Build the project in Release mode.
-2. Copy `AppEventHandler.exe`, `AppEventHandler.exe.config`, and any required custom DLLs to the server.
+2. Copy `BESAppEventHandler.exe`, `BESAppEventHandler.exe.config`, and any required custom DLLs to the server.
 3. On the server, place them in the following folder:
 
-   ```text
-   C:\Program Files (x86)\Made4Net\SCExpert\Services
-   ```
+```text
+C:\Program Files (x86)\Made4Net\SCExpert\Services
+```
 
 4. Make sure the service account has permission to write to the configured log folder.
 
@@ -120,25 +132,61 @@ Service ExpertAppEventHandler has been successfully installed.
 
 ## Step 7 - Start and verify the service
 
+Run:
+
 ```bat
 sc query ExpertAppEventHandler
 sc qc ExpertAppEventHandler
 net start ExpertAppEventHandler
 ```
 
-Use `ExpertAppEventHandler` because that is the `ServiceName` configured in `ProjectInstaller`. After starting it, the service should show `RUNNING` in Services or in the `sc query` output.
+Use `ExpertAppEventHandler` because that is the `ServiceName` configured in `ProjectInstaller`.
 
-## Step 8 - Test it
+After starting it, the service should show `RUNNING` in Services or in the `sc query` output.
 
-1. Trigger one controlled Made4net event. For BES, we used event 41 by creating a test load.
-2. Open the AppEventHandler log and confirm that the event and message values were received.
-3. Check that the database update or export happened once.
-4. If the message keeps retrying, check the exception in the handler log and the Windows Event Viewer.
+## Step 8 - Configure the queue and event
+
+The `AppEventHandler` queue and the required event need to be registered in Made4net before the service can receive the event.
+
+First, register the `AppEventHandler` message queue:
+
+```sql
+insert into MESSAGEQUEUES
+values ('AppEventHandler', '.\private$\AppEventHandler', NULL, 0)
+```
+
+This registers the Made4net queue name `AppEventHandler` and points it to the MSMQ private queue:
+
+```text
+.\private$\AppEventHandler
+```
+
+Next, register the event that should be sent to this queue.
+
+For example, for event `41 - CREATELOAD`:
+
+```sql
+insert into EVENTSREGISTRATION
+values ('41', 'AppEventHandler', NULL, NULL)
+```
+
+This tells Made4net to send event `41` to the `AppEventHandler` queue.
+
+Before running the insert scripts, check that the queue and event are not already registered to avoid duplicate records.
+
+## Step 9 - Test it
+
+1. Trigger one controlled Made4net event.
+2. For BES, we used event `41` by creating a test load.
+3. Open the AppEventHandler log and confirm that the event and message values were received.
+4. Check that the database update or export happened once.
+5. If the message keeps retrying, check the exception in the handler log and the Windows Event Viewer.
 
 ## Quick troubleshooting
 
-- **Service does not exist:** `ProjectInstaller` was probably missing or `InstallUtil` did not find it.
-- **Service name is invalid:** use `ExpertAppEventHandler`, not `BESAppEventHandler`.
-- **Service starts and stops:** check Event Viewer, the `.config` file, missing DLLs, and queue configuration.
-- **MSMQ format name is invalid:** verify the private queue name and Made4net queue configuration.
-- **Access denied:** give the service account permission to the log or export folder.
+* **Service does not exist:** `ProjectInstaller` was probably missing or `InstallUtil` did not find it.
+* **Service name is invalid:** use `ExpertAppEventHandler`, not `BESAppEventHandler`.
+* **Service starts and stops:** check Event Viewer, the `.config` file, missing DLLs, and queue configuration.
+* **MSMQ format name is invalid:** verify the private queue name and Made4net queue configuration.
+* **Access denied:** give the service account permission to the log or export folder.
+* **Event is not received:** verify that the event is registered in `EVENTSREGISTRATION` and points to `AppEventHandler`.

@@ -58,7 +58,7 @@ case "sendcarriershipment":
 ### Scripts
 There are 3 folders included for the FedEx integration
 
-1. App
+&nbsp; 1\. App
 
 The application scripts needed specific to FedEx. These include 
 
@@ -68,11 +68,11 @@ FedEx services codelist (Defines the various service methods that we can send to
 
 vFedexShipmentInfo - a new view that maps outbound order, contact, consignee, and any other fields to the expected field names for the integration. Any customizations or new mappings should be made to this view
 
-2. Sys
+&nbsp; 2\. Sys
 
 This is just to add sys_params for logging, and the base URL used by FedEx (Either to point to FedEx test or prod)
 
-3. Duplicate Scripts
+&nbsp; 3\. Duplicate Scripts
 
 These are used by both FedEx and UPS integrations and may not be needed if the client already has an integration installed.
 
