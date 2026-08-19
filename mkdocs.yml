@@ -14,6 +14,7 @@ nav:
       - File Import From Workstation: FileImports/FileImportfromWS.md     
       - ViewToTable Scheduler: schedulers/view-to-table-scheduler.md
       - Force User Logout on Scheduler: schedulers/force-user-logout.md
+      - Shared Project: configuration/Shared_Project_Code_Notes.md
   - Data Editors:
       - Expressions using functions: DataTables/dtExpressions.md
       - Expressions using Views : DataTables/sku_onpropertychange_po.md
