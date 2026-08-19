@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://made4nethelp.github.io/Made4NetDocumentation/configuration/Shared_Project_Code_Notes/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Shared Project - Made4Net Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Shared Project";
+        var mkdocs_page_input_path = "configuration\\Shared_Project_Code_Notes.md";
+        var mkdocs_page_url = "/Made4NetDocumentation/configuration/Shared_Project_Code_Notes/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Made4Net Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../certificateInstallationSteps/">IIS HTTPS Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../server-disconnection-max-pool/">Timeout Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../QRStringConfig/">QR String Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../aws-s3-file-transfer/">AWS S3 File Transfer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../integration-services/">Integration Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../FedXIntegration/fedexIntegration_notes_v1.md">Fedex Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FedXIntegration/UPSIntegration%20notes_v1/">UPS Integration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../AppEventHanlders/AppeventHandlerDocumentation/">App Event Handler Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../LoadImporter/LoadImporter/">Load Importer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImports/FileImportfromWS/">File Import From Workstation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/view-to-table-scheduler/">ViewToTable Scheduler</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../schedulers/force-user-logout/">Force User Logout on Scheduler</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Shared Project</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#filesimporterplugin">FilesImporterPlugin</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fileexport">FileExport</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#httpexport">HttpExport</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#httpexporttoxml">HttpExportToXML</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#httplistenerplugin">HttpListenerPlugin</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#handleinputdata">handleInputData()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getdocumentdata">GetDocumentData()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preprocessdocument">PreProcessDocument()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#validatedata">ValidateData()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#validatelines">ValidateLines()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#postprocessdocument">PostProcessDocument()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#httplistenerpluginnonxml">HttpListenerPluginNonXML</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scerestapilandingpage">SCERestApiLandingPage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Editors</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dtExpressions/">Expressions using functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/sku_onpropertychange_po/">Expressions using Views</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../DataTables/dt-use-dt-connection/">DT Property on multiple warehouses</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">SCExpert Release Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ReleaseNotes/4.12.1.x/">4.12.1.x</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/nuget-reference/">Nuget Reference Error</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../FileImporter/">File Importer Troubleshoot</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Made4Net Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Shared Project</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="shared-project-code-notes">Shared Project Code Notes</h1>
+<p>This document gives a quick overview of some of the common classes in the shared project and what they are used for.</p>
+<p>The shared project contains code that can be reused by different customer projects so we do not have to build the same import, export, API, or EDI logic again.</p>
+<h2 id="filesimporterplugin">FilesImporterPlugin</h2>
+<p><code>FilesImporterPlugin</code> is used for file imports.</p>
+<p>It checks a configured folder for files based on the file filter. Once it finds a file, it renames the file while it is being processed so the same file does not get picked up again.</p>
+<p>The file is then read and translated into XML using the configured <code>ImportTranslationFile</code>. After that, the XML can go through <code>PreProcessFile()</code> and <code>ProcessFile()</code> before it is sent to SCExpert Connect.</p>
+<p>The import runs on a timer. The interval comes from either:</p>
+<ul>
+<li><code>ImportInerval</code></li>
+<li><code>ImportTimerInterval</code></li>
+</ul>
+<p>Some of the common parameters used by this plugin are:</p>
+<ul>
+<li><code>FilesFilter</code></li>
+<li><code>ImportFileNameFilter</code></li>
+<li><code>InputFilesPath</code></li>
+<li><code>ImportDirectory</code></li>
+<li><code>ImportTranslationFile</code></li>
+<li><code>SuccessFilePath</code></li>
+<li><code>ErrorFilePath</code></li>
+<li><code>WaitComplete</code></li>
+<li><code>SyncFilter</code></li>
+</ul>
+<p>Once the XML is ready, it is sent to Connect using:</p>
+<pre><code class="language-csharp">NotifyImportProcessComplete(oTranslatedFiles);
+</code></pre>
+<p>If processing fails, the error is written to the log and a failed Connect transaction is posted.</p>
+<p>The main methods that can be overridden for customer-specific logic are:</p>
+<pre><code class="language-csharp">PreProcessFile(...)
+ProcessFile(...)
+</code></pre>
+<h2 id="fileexport">FileExport</h2>
+<p><code>FileExport</code> is used for outbound file integrations.</p>
+<p>SCExpert Connect passes an XML document into the <code>Export()</code> method.</p>
+<p><img alt="FileExport plugin configuration" src="media/image1.png" /></p>
+<p>The plugin gets the output filename and then either writes the XML directly to the file or runs an XSLT before creating the file.</p>
+<p>If <code>ExportCustomTranslationFile</code> is configured, the XML is translated before the file is written.</p>
+<p>There is also a <code>PostProcess(...)</code> method. This can be overridden if we need to do anything after the outbound file has been created.</p>
+<p>For example, a customer project could use it to update a database field or run some additional logic after the export.</p>
+<h2 id="httpexport">HttpExport</h2>
+<p><code>HttpExport</code> is used when Made4net needs to send data to an external API.</p>
+<p><img alt="HttpExport plugin configuration" src="media/image2.png" /></p>
+<p><img alt="HttpExport plugin parameters" src="media/image3.png" /></p>
+<p>The XML comes from SCExpert Connect and first goes through:</p>
+<pre><code class="language-csharp">DoPreProcess(...)
+</code></pre>
+<p>This is available so customer projects can modify the XML before the request is sent.</p>
+<p>If <code>ExportCustomTranslationFile</code> is configured, the XML is also passed through the configured XSLT.</p>
+<p>The request is normally sent as JSON.</p>
+<p>The XML can be converted to JSON using:</p>
+<pre><code class="language-csharp">JsonConvert.SerializeXmlNode(...)
+</code></pre>
+<p>or through an XSLT.</p>
+<p>If the plugin is configured with:</p>
+<pre><code class="language-text">ConvertToJSON = XSLT
+</code></pre>
+<p>then the <code>JSONXslt</code> file is used to create the JSON.</p>
+<p>This is useful when the JSON format required by the external system is very different from the XML coming from Made4net.</p>
+<h3 id="authentication">Authentication</h3>
+<p><code>HttpExport</code> currently supports:</p>
+<ul>
+<li>OAuth 1.0</li>
+<li>Bearer Token</li>
+<li>OAuth 2.0</li>
+<li>Basic Authentication</li>
+</ul>
+<p>The authentication method comes from the <code>AuthType</code> plugin parameter.</p>
+<p>Depending on the authentication type, other parameters such as these may also be used:</p>
+<ul>
+<li><code>ConsumerKey</code></li>
+<li><code>ConsumerSecret</code></li>
+<li><code>AccessToken</code></li>
+<li><code>TokenSecret</code></li>
+<li><code>UserName</code></li>
+<li><code>password</code></li>
+<li><code>AuthEndPoint</code></li>
+<li><code>Scope</code></li>
+<li><code>Grant_Type</code></li>
+</ul>
+<p>After the API request is sent, the response goes through:</p>
+<pre><code class="language-csharp">DoPostProcess(...)
+</code></pre>
+<p>By default, the response is treated as a failure if it is empty or contains <code>error</code> or <code>Failed</code>.</p>
+<p>Customer projects can override <code>DoPostProcess()</code> if the external API has a different response format.</p>
+<h2 id="httpexporttoxml">HttpExportToXML</h2>
+<p><code>HttpExportToXML</code> is very similar to <code>HttpExport</code>.</p>
+<p>The main difference is that this class can send either XML or JSON.</p>
+<p><img alt="HttpExportToXML plugin configuration" src="media/image4.png" /></p>
+<p>The format is controlled by <code>OutputFormat</code>.</p>
+<p>If:</p>
+<pre><code class="language-text">OutputFormat = XML
+</code></pre>
+<p>the request body is:</p>
+<pre><code class="language-csharp">xml.OuterXml
+</code></pre>
+<p>Otherwise, the plugin follows the normal JSON conversion logic.</p>
+<p>So normally:</p>
+<pre><code class="language-text">HttpExport      -&gt; JSON API exports
+HttpExportToXML -&gt; JSON or XML API exports
+</code></pre>
+<h2 id="httplistenerplugin">HttpListenerPlugin</h2>
+<p><code>HttpListenerPlugin</code> is used for inbound HTTP/API integrations.</p>
+<p><img alt="HttpListenerPlugin configuration" src="media/image5.png" /></p>
+<p>The plugin creates an HTTP listener using:</p>
+<ul>
+<li><code>IP</code></li>
+<li><code>PORT</code></li>
+<li><code>PATH</code></li>
+</ul>
+<p>These values are used to build the listener URL.</p>
+<p>When the plugin starts, it listens for incoming HTTP requests and processes the requests using worker threads.</p>
+<p>The request body is first read as text and then passed through:</p>
+<pre><code class="language-csharp">handleInputData(...)
+</code></pre>
+<p>After that it is loaded into an <code>XmlDocument</code>.</p>
+<p>The general flow is:</p>
+<pre><code class="language-text">External system
+      |
+HTTP request
+      |
+HttpListenerPlugin
+      |
+Read request
+      |
+Pre-process / validate
+      |
+SCExpert Connect
+      |
+WMS
+      |
+Return response
+</code></pre>
+<h3 id="handleinputdata">handleInputData()</h3>
+<p><code>handleInputData(...)</code> is used when we need to change the raw request before loading it into XML.</p>
+<p>The base implementation just returns the same input.</p>
+<p>A customer plugin can override this if it needs to convert another format into XML.</p>
+<h3 id="getdocumentdata">GetDocumentData()</h3>
+<p><code>GetDocumentData(...)</code> can be used when an API request is only retrieving information.</p>
+<p>If this method returns data, the plugin can send the result back without continuing with the normal Connect import process.</p>
+<h3 id="preprocessdocument">PreProcessDocument()</h3>
+<p><code>PreProcessDocument(...)</code> is used when something needs to be changed before the XML is sent to Connect.</p>
+<p>This is normally where customer-specific processing can be added.</p>
+<p>For example:</p>
+<ul>
+<li>Add missing XML values</li>
+<li>Change a value</li>
+<li>Look up something from the database</li>
+<li>Route the request</li>
+<li>Run additional validation</li>
+</ul>
+<h3 id="validatedata">ValidateData()</h3>
+<p><code>ValidateData()</code> does some common validation before the data goes into Connect.</p>
+<p>For inbound and outbound orders, the shared code checks things such as:</p>
+<ul>
+<li>Consignee</li>
+<li>Company</li>
+<li>Contact</li>
+<li>SKU</li>
+</ul>
+<p>If a required SKU does not exist, the request is stopped instead of sending invalid data into the WMS.</p>
+<h3 id="validatelines">ValidateLines()</h3>
+<p><code>ValidateLines()</code> is used when an existing inbound or outbound order is being updated.</p>
+<p>For outbound orders, the current logic allows the lines to be refreshed when the order is in an allowed status such as <code>NEW</code> or <code>WAVEASSIGNED</code>.</p>
+<p>For inbound orders, the order needs to still be <code>NEW</code>.</p>
+<p>The existing detail lines are removed before the incoming lines are processed again.</p>
+<h3 id="postprocessdocument">PostProcessDocument()</h3>
+<p><code>PostProcessDocument()</code> runs after Connect processing.</p>
+<p>The shared code uses this method to update UDF values from the incoming XML.</p>
+<p>It currently handles UDF updates for:</p>
+<ul>
+<li>Outbound Orders</li>
+<li>Inbound Orders</li>
+<li>SKU</li>
+<li>Flowthrough</li>
+<li>Receipts</li>
+</ul>
+<p>For example, receipt UDF values are updated in:</p>
+<ul>
+<li><code>RECEIPTHEADER</code></li>
+<li><code>RECEIPTDETAIL</code></li>
+</ul>
+<h2 id="httplistenerpluginnonxml">HttpListenerPluginNonXML</h2>
+<p><code>HttpListenerPluginNonXML</code> inherits from <code>HttpListenerPlugin</code>.</p>
+<p>It is used when the incoming request is not already XML.</p>
+<p><img alt="HttpListenerPluginNonXML configuration" src="media/image6.png" /></p>
+<p>In the current code, this is mainly used for CSV imports.</p>
+<p>The plugin reads <code>CSVTranslationFile</code> and uses that translation file to convert the incoming CSV into XML.</p>
+<p>After the CSV has been converted, the normal <code>HttpListenerPlugin</code> processing continues.</p>
+<pre><code class="language-text">CSV request
+     |
+CSVTranslationFile
+     |
+XML
+     |
+HttpListenerPlugin
+     |
+SCExpert Connect
+</code></pre>
+<p>This lets us reuse the normal HTTP listener code without changing the rest of the import process.</p>
+<h2 id="scerestapilandingpage">SCERestApiLandingPage</h2>
+<p><code>SCERestApiLandingPage</code> is used as a routing point for REST API requests.</p>
+<p>Instead of the external system needing to know the URL for every individual plugin, the request can come into the landing page first.</p>
+<p>The landing page reads the warehouse from the incoming XML and uses the BO type to find the correct destination plugin.</p>
+<p>The routing information comes from <code>RestApiPluginRegistry</code>.</p>
+<p><img alt="SCERestApiLandingPage plugin configuration" src="media/image7.png" /></p>
+<p><img alt="SCERestApiLandingPage plugin type" src="media/image8.png" /></p>
+<p>The code uses information such as:</p>
+<ul>
+<li>Warehouse</li>
+<li>BO Type</li>
+<li>IP</li>
+<li>Port</li>
+<li>URL Path</li>
+<li>HTTP Method</li>
+</ul>
+<p><img alt="RestApiPluginRegistry entries" src="media/image9.png" /></p>
+<p>Once the destination plugin is found, the landing page forwards the original XML to that plugin.</p>
+<p>The flow is roughly:</p>
+<pre><code class="language-text">External system
+      |
+SCERestApiLandingPage
+      |
+Read warehouse / BO type
+      |
+RestApiPluginRegistry
+      |
+Find destination plugin
+      |
+Forward request
+      |
+Receive result
+      |
+Return response
+</code></pre>
+<p>If more than one matching plugin is returned, the transaction results are combined into one response.</p>
+<h2 id="quick-reference">Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FilesImporterPlugin</code></td>
+<td>Importing files from a folder into Made4net</td>
+</tr>
+<tr>
+<td><code>FileExport</code></td>
+<td>Creating outbound files</td>
+</tr>
+<tr>
+<td><code>HttpListenerPlugin</code></td>
+<td>Incoming API requests</td>
+</tr>
+<tr>
+<td><code>HttpListenerPluginNonXML</code></td>
+<td>Incoming requests such as CSV that need to be converted into XML first</td>
+</tr>
+<tr>
+<td><code>HttpExport</code></td>
+<td>Sending data to an external API, normally as JSON</td>
+</tr>
+<tr>
+<td><code>HttpExportToXML</code></td>
+<td>API exports that can send either XML or JSON</td>
+</tr>
+<tr>
+<td><code>SCERestApiLandingPage</code></td>
+<td>Routing an API request to the correct plugin</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../schedulers/force-user-logout/" class="btn btn-neutral float-left" title="Force User Logout on Scheduler"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../DataTables/dtExpressions/" class="btn btn-neutral float-right" title="Expressions using functions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../schedulers/force-user-logout/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../DataTables/dtExpressions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
